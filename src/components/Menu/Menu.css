@@ -5,6 +5,11 @@
   width: 100vw;
   height: 100svh;
   z-index: 2;
+  pointer-events: none;
+}
+
+.nav {
+  pointer-events: all;
 }
 
 .nav,

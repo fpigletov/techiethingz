@@ -1,3 +1,11 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <div className="debug-nav">
+        <Link href="/catalogue">Catalogue</Link>
+      </div>
+    </>
+  );
 }

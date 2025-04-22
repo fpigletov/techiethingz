@@ -7,8 +7,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
+import { ReactLenis, useLenis } from "lenis/react";
+
 const Page = () => {
   const containerRef = useRef(null);
+
+  const lenis = useLenis(({ scroll }) => {});
 
   const productDistribution = [
     [1, 0, 0, 1],
@@ -73,38 +77,44 @@ const Page = () => {
   );
 
   return (
-    <div className="catalogue-page" ref={containerRef}>
-      <div className="products">
-        {productLayout.map((row, rowIndex) => (
-          <div className="row" key={`row-${rowIndex}`}>
-            {row.map((column, colIndex) => (
-              <div
-                className={`column ${
-                  column.length === 0 ? "empty-column" : ""
-                }`}
-                key={`col-${rowIndex}-${colIndex}`}
-              >
-                {column.map((product) => (
-                  <div className="product-card" key={product.id}>
-                    <div className="product-card-image">
-                      <img
-                        src={`/product_images/${product.previewImg}`}
-                        alt={product.name}
-                        className="product-card-img"
-                      />
+    <ReactLenis root>
+      <div className="catalogue-page" ref={containerRef}>
+        <div className="scroll-padding"></div>
+        <div className="products">
+          {productLayout.map((row, rowIndex) => (
+            <div className="row" key={`row-${rowIndex}`}>
+              {row.map((column, colIndex) => (
+                <div
+                  className={`column ${
+                    column.length === 0 ? "empty-column" : ""
+                  }`}
+                  key={`col-${rowIndex}-${colIndex}`}
+                >
+                  {column.map((product) => (
+                    <div className="product-card" key={product.id}>
+                      <div className="product-card-image">
+                        <img
+                          src={`/product_images/${product.previewImg}`}
+                          alt={product.name}
+                          className="product-card-img"
+                        />
+                      </div>
+                      <div className="product-info">
+                        <p className="product-card-name">{product.name}</p>
+                        <p className="product-card-price">
+                          USD {product.price}
+                        </p>
+                      </div>
                     </div>
-                    <div className="product-info">
-                      <p className="product-card-name">{product.name}</p>
-                      <p className="product-card-price">USD {product.price}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="scroll-padding"></div>
       </div>
-    </div>
+    </ReactLenis>
   );
 };
 
