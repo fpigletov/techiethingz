@@ -1,0 +1,73 @@
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+}
+
+.nav,
+.menu-overlay-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1em;
+  display: flex;
+  z-index: 1;
+}
+
+.nav-logo,
+.menu-overlay-nav-logo {
+  flex: 2;
+}
+
+.nav-items {
+  flex: 1;
+  display: flex;
+}
+
+.nav-menu-toggle-open,
+.nav-cart-btn,
+.menu-overlay-nav-toggle-close {
+  flex: 1;
+}
+
+.nav-logo a,
+.nav-menu-toggle-open p,
+.nav-cart-btn p,
+.menu-overlay-nav-logo a,
+.menu-overlay-nav-toggle-close p {
+  transform: translateY(0%);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background-color: #000;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  will-change: transform, clip-path;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.menu-overlay-nav-logo a,
+.menu-overlay-nav-toggle-close p {
+  color: #fff;
+}
+
+.nav-logo a,
+.menu-overlay-nav-logo a {
+  font-weight: 800;
+}
+
+.nav-menu-toggle-open .revealer,
+.nav-cart-btn .revealer,
+.menu-overlay-nav-logo .revealer,
+.menu-overlay-nav-toggle-close .revealer {
+  cursor: pointer;
+}
