@@ -77,9 +77,26 @@ const Page = () => {
   );
 
   return (
-    <ReactLenis root>
+    <ReactLenis
+      root
+      options={{
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: "vertical",
+        gestureDirection: "vertical",
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+        lerp: 0.1,
+        wheelMultiplier: 1,
+        orientation: "vertical",
+        smoothWheel: true,
+        syncTouch: true,
+      }}
+    >
       <div className="catalogue-page" ref={containerRef}>
-        <div className="scroll-padding"></div>
+        <div className="scroll-padding-top"></div>
         <div className="products">
           {productLayout.map((row, rowIndex) => (
             <div className="row" key={`row-${rowIndex}`}>
@@ -112,7 +129,7 @@ const Page = () => {
             </div>
           ))}
         </div>
-        <div className="scroll-padding"></div>
+        <div className="scroll-padding-bottom"></div>
       </div>
     </ReactLenis>
   );
