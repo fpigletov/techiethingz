@@ -1,7 +1,15 @@
+"use client";
+
 import "./catalogue.css";
 import products from "@/products";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+
 const Page = () => {
+  const containerRef = useRef(null);
+
   const productDistribution = [
     [1, 0, 0, 1],
     [0, 1, 0, 0],
@@ -41,8 +49,31 @@ const Page = () => {
 
   const productLayout = getProductLayout();
 
+  useGSAP(
+    () => {
+      const rows = gsap.utils.toArray(".row");
+
+      gsap.fromTo(
+        rows,
+        {
+          y: 300,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.1,
+          delay: 0.5,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <div className="catalogue-page">
+    <div className="catalogue-page" ref={containerRef}>
       <div className="products">
         {productLayout.map((row, rowIndex) => (
           <div className="row" key={`row-${rowIndex}`}>
