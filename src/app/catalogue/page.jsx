@@ -118,9 +118,7 @@ const Page = () => {
                       </div>
                       <div className="product-info">
                         <p className="product-card-name">{product.name}</p>
-                        <p className="product-card-price">
-                          USD {product.price}
-                        </p>
+                        <p className="product-card-price">${product.price}</p>
                       </div>
                     </div>
                   ))}
