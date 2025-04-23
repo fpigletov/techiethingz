@@ -2,6 +2,8 @@
 
 import "./catalogue.css";
 import products from "@/products";
+import { generateSlug } from "@/utils";
+import Link from "next/link";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -108,19 +110,25 @@ const Page = () => {
                   key={`col-${rowIndex}-${colIndex}`}
                 >
                   {column.map((product) => (
-                    <div className="product-card" key={product.id}>
-                      <div className="product-card-image">
-                        <img
-                          src={`/product_images/${product.previewImg}`}
-                          alt={product.name}
-                          className="product-card-img"
-                        />
+                    <Link
+                      href={`/catalogue/${generateSlug(product.name)}`}
+                      key={product.id}
+                      className="product-link"
+                    >
+                      <div className="product-card">
+                        <div className="product-card-image">
+                          <img
+                            src={`/product_images/${product.previewImg}`}
+                            alt={product.name}
+                            className="product-card-img"
+                          />
+                        </div>
+                        <div className="product-info">
+                          <p className="product-card-name">{product.name}</p>
+                          <p className="product-card-price">${product.price}</p>
+                        </div>
                       </div>
-                      <div className="product-info">
-                        <p className="product-card-name">{product.name}</p>
-                        <p className="product-card-price">${product.price}</p>
-                      </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               ))}
