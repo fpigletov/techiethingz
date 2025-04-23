@@ -40,13 +40,59 @@
   gap: 1em;
 }
 
+.more-products-header {
+  margin-bottom: 2em;
+}
+
+.more-products-list {
+  display: flex;
+  gap: 1em;
+  padding-bottom: 15vh;
+}
+
+.related-product-link {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.related-product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.related-product-image {
+  width: 100%;
+  aspect-ratio: 5/7;
+  margin-bottom: 0.5em;
+  overflow: hidden;
+}
+
+.related-product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 @media (max-width: 900px) {
   .product-detail-container,
-  .info-row {
+  .info-row,
+  .more-products-list {
     flex-direction: column;
   }
 
   .info-item {
     min-height: 50px;
+  }
+
+  .related-product-link {
+    margin-bottom: 3em;
+  }
+
+  .related-product-image {
+    aspect-ratio: 4/3;
   }
 }

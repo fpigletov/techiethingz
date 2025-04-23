@@ -2,17 +2,93 @@
 
 import "./product-detail.css";
 import products from "@/products";
-import { findProductBySlug } from "@/utils";
+import { findProductBySlug, generateSlug } from "@/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { ReactLenis, useLenis } from "lenis/react";
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const product = findProductBySlug(products, slug);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   const lenis = useLenis(({ scroll }) => {});
+
+  useEffect(() => {
+    if (product) {
+      const otherProducts = products.filter((p) => p.id !== product.id);
+
+      let sameCategory = otherProducts.filter(
+        (p) => p.category === product.category
+      );
+
+      let sameFileType = otherProducts.filter(
+        (p) =>
+          p.fileType === product.fileType && p.category !== product.category
+      );
+
+      let sameDesigner = otherProducts.filter(
+        (p) =>
+          p.designer === product.designer && p.category !== product.category
+      );
+
+      let selectedProducts = [];
+
+      const seed = parseInt(product.id, 10);
+
+      if (sameCategory.length > 0) {
+        const catIndex = seed % sameCategory.length;
+        selectedProducts.push(sameCategory[catIndex]);
+
+        if (sameCategory.length > 1) {
+          const catIndex2 = (seed + 1) % sameCategory.length;
+          if (catIndex !== catIndex2) {
+            selectedProducts.push(sameCategory[catIndex2]);
+          }
+        }
+      }
+
+      if (sameFileType.length > 0 && selectedProducts.length < 4) {
+        const fileTypeIndex = seed % sameFileType.length;
+        const fileTypeProduct = sameFileType[fileTypeIndex];
+
+        if (!selectedProducts.some((p) => p.id === fileTypeProduct.id)) {
+          selectedProducts.push(fileTypeProduct);
+        }
+      }
+
+      if (sameDesigner.length > 0 && selectedProducts.length < 4) {
+        const designerIndex = seed % sameDesigner.length;
+        const designerProduct = sameDesigner[designerIndex];
+
+        if (!selectedProducts.some((p) => p.id === designerProduct.id)) {
+          selectedProducts.push(designerProduct);
+        }
+      }
+
+      if (selectedProducts.length < 4) {
+        const remainingProducts = otherProducts.filter(
+          (p) => !selectedProducts.some((sp) => sp.id === p.id)
+        );
+
+        remainingProducts.sort((a, b) => {
+          const scoreA = (parseInt(a.id, 10) * seed) % 100;
+          const scoreB = (parseInt(b.id, 10) * seed) % 100;
+          return scoreB - scoreA;
+        });
+
+        const neededCount = 4 - selectedProducts.length;
+        selectedProducts = [
+          ...selectedProducts,
+          ...remainingProducts.slice(0, neededCount),
+        ];
+      }
+
+      setRelatedProducts(selectedProducts);
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -131,7 +207,39 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        <div className="scroll-padding-bottom"></div>
+        <div className="more-products">
+          <div className="more-products-header">
+            <p>Related Products</p>
+          </div>
+
+          <div className="more-products-list">
+            {relatedProducts.map((relatedProduct) => (
+              <Link
+                href={`/catalogue/${generateSlug(relatedProduct.name)}`}
+                key={relatedProduct.id}
+                className="related-product-link"
+              >
+                <div className="related-product-card">
+                  <div className="related-product-image">
+                    <img
+                      src={`/product_images/${relatedProduct.previewImg}`}
+                      alt={relatedProduct.name}
+                      className="related-product-img"
+                    />
+                  </div>
+                  <div className="related-product-info">
+                    <p className="related-product-name">
+                      {relatedProduct.name}
+                    </p>
+                    <p className="related-product-price">
+                      ${relatedProduct.price}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </ReactLenis>
   );
