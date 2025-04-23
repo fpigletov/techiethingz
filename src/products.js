@@ -15,7 +15,7 @@ const products = [
     fileType: "PSD",
     previewImg: "product_001.jpeg",
     productImages: ["product_001.jpeg", "product_002.jpeg", "product_003.jpeg"],
-    compatibility: ["Photoshop", "Figma"],
+    compatibility: "Photoshop",
   },
   {
     id: "002",
@@ -33,7 +33,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_002.jpeg",
     productImages: ["product_002.jpeg", "product_003.jpeg", "product_004.jpeg"],
-    compatibility: ["Figma", "Sketch"],
+    compatibility: "Figma",
   },
   {
     id: "003",
@@ -51,7 +51,7 @@ const products = [
     fileType: "PSD",
     previewImg: "product_003.jpeg",
     productImages: ["product_003.jpeg", "product_004.jpeg", "product_005.jpeg"],
-    compatibility: ["Photoshop"],
+    compatibility: "Photoshop",
   },
   {
     id: "004",
@@ -69,7 +69,7 @@ const products = [
     fileType: "SVG",
     previewImg: "product_004.jpeg",
     productImages: ["product_004.jpeg", "product_005.jpeg", "product_006.jpeg"],
-    compatibility: ["Figma"],
+    compatibility: "Figma",
   },
   {
     id: "005",
@@ -87,7 +87,7 @@ const products = [
     fileType: "PSD",
     previewImg: "product_005.jpeg",
     productImages: ["product_005.jpeg", "product_006.jpeg", "product_007.jpeg"],
-    compatibility: ["Photoshop"],
+    compatibility: "Photoshop",
   },
   {
     id: "006",
@@ -105,7 +105,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_006.jpeg",
     productImages: ["product_006.jpeg", "product_007.jpeg", "product_008.jpeg"],
-    compatibility: ["Figma"],
+    compatibility: "Figma",
   },
   {
     id: "007",
@@ -123,7 +123,7 @@ const products = [
     fileType: "PSD",
     previewImg: "product_007.jpeg",
     productImages: ["product_007.jpeg", "product_008.jpeg", "product_009.jpeg"],
-    compatibility: ["Photoshop", "Sketch"],
+    compatibility: "Sketch",
   },
   {
     id: "008",
@@ -141,7 +141,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_008.jpeg",
     productImages: ["product_008.jpeg", "product_009.jpeg", "product_010.jpeg"],
-    compatibility: ["Photoshop"],
+    compatibility: "Photoshop",
   },
   {
     id: "009",
@@ -159,7 +159,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_009.jpeg",
     productImages: ["product_009.jpeg", "product_010.jpeg", "product_011.jpeg"],
-    compatibility: ["Figma"],
+    compatibility: "Figma",
   },
   {
     id: "010",
@@ -177,7 +177,7 @@ const products = [
     fileType: "MP4",
     previewImg: "product_010.jpeg",
     productImages: ["product_010.jpeg", "product_011.jpeg", "product_012.jpeg"],
-    compatibility: ["After Effects"],
+    compatibility: "After Effects",
   },
   {
     id: "011",
@@ -195,7 +195,7 @@ const products = [
     fileType: "PSD",
     previewImg: "product_011.jpeg",
     productImages: ["product_011.jpeg", "product_012.jpeg", "product_013.jpeg"],
-    compatibility: ["Figma", "Sketch"],
+    compatibility: "Figma",
   },
   {
     id: "012",
@@ -213,7 +213,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_012.jpeg",
     productImages: ["product_012.jpeg", "product_013.jpeg", "product_014.jpeg"],
-    compatibility: ["Figma"],
+    compatibility: "Figma",
   },
   {
     id: "013",
@@ -231,7 +231,7 @@ const products = [
     fileType: "MP3",
     previewImg: "product_013.jpeg",
     productImages: ["product_013.jpeg", "product_014.jpeg", "product_015.jpeg"],
-    compatibility: ["All DAWs"],
+    compatibility: "All DAWs",
   },
   {
     id: "014",
@@ -249,7 +249,7 @@ const products = [
     fileType: "PNG",
     previewImg: "product_014.jpeg",
     productImages: ["product_014.jpeg", "product_015.jpeg", "product_001.jpeg"],
-    compatibility: ["Figma"],
+    compatibility: "Figma",
   },
   {
     id: "015",
@@ -267,7 +267,7 @@ const products = [
     fileType: "MP4",
     previewImg: "product_015.jpeg",
     productImages: ["product_015.jpeg", "product_001.jpeg", "product_002.jpeg"],
-    compatibility: ["After Effects", "Blender"],
+    compatibility: "Blender",
   },
 ];
 

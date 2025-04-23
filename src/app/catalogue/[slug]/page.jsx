@@ -5,14 +5,20 @@ import products from "@/products";
 import { findProductBySlug, generateSlug } from "@/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { ReactLenis, useLenis } from "lenis/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const product = findProductBySlug(products, slug);
   const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const containerRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const lenis = useLenis(({ scroll }) => {});
 
@@ -90,6 +96,78 @@ const ProductDetail = () => {
     }
   }, [product]);
 
+  useGSAP(() => {
+    if (!containerRef.current || !product) return;
+
+    gsap.set(".info-item .revealer p", {
+      y: "100%",
+    });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power3.out",
+        delay: 0.5,
+      },
+    });
+
+    tl.to(".info-item .revealer:first-child p", {
+      y: "0%",
+      duration: 0.75,
+    });
+
+    tl.to(
+      ".info-item .revealer:nth-child(2) p",
+      {
+        y: "0%",
+        duration: 0.75,
+      },
+      "-=1.125"
+    );
+
+    if (descriptionRef.current) {
+      const splitDescription = new SplitType(descriptionRef.current, {
+        types: "lines",
+        lineClass: "line",
+      });
+
+      splitDescription.lines.forEach((line) => {
+        const content = line.innerHTML;
+        line.innerHTML = `<span>${content}</span>`;
+      });
+
+      gsap.set("#product-description .line span", {
+        y: "100%",
+        display: "block",
+      });
+
+      tl.to(
+        "#product-description .line span",
+        {
+          y: "0%",
+          duration: 0.75,
+          stagger: 0.1,
+        },
+        "-=1.25"
+      );
+    }
+
+    tl.fromTo(
+      ".product-detail-img",
+      {
+        y: 300,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.1,
+      },
+      "-=1.75"
+    );
+  }, [product, containerRef]);
+
   if (!product) {
     return (
       <div className="product-not-found">
@@ -118,7 +196,7 @@ const ProductDetail = () => {
         syncTouch: true,
       }}
     >
-      <div className="product-detail-page">
+      <div className="product-detail-page" ref={containerRef}>
         <div className="product-detail-container">
           <div className="product-detail-col product-detail-copy">
             <div className="info-row">
@@ -160,12 +238,8 @@ const ProductDetail = () => {
                 <div className="revealer">
                   <p>Compatibility</p>
                 </div>
-                <div className="info-item-row">
-                  {product.compatibility.map((item, index) => (
-                    <div className="revealer" key={index}>
-                      <p>{item}</p>
-                    </div>
-                  ))}
+                <div className="revealer">
+                  <p>{product.compatibility}</p>
                 </div>
               </div>
               <div className="info-item">
@@ -190,7 +264,9 @@ const ProductDetail = () => {
                 <div className="revealer">
                   <p>Info</p>
                 </div>
-                <p>{product.description.bodyCopy1}</p>
+                <p id="product-description" ref={descriptionRef}>
+                  {product.description.bodyCopy1}
+                </p>
               </div>
               <div className="info-item"></div>
             </div>

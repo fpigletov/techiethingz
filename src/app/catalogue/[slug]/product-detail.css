@@ -23,8 +23,7 @@
   gap: 1em;
 }
 
-.info-row,
-.info-item-row {
+.info-row {
   display: flex;
   gap: 1em;
 }
@@ -75,6 +74,18 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+p#product-description .line {
+  position: relative;
+  width: max-content;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+p#product-description .line span {
+  position: relative;
+  display: block;
+  will-change: transform;
 }
 
 @media (max-width: 900px) {

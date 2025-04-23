@@ -54,6 +54,7 @@ p {
   font-weight: 500;
   letter-spacing: -0.008rem;
   line-height: 1;
+  will-change: transform;
 }
 
 .revealer {
