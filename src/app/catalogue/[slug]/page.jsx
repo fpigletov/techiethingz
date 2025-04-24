@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 
+import Footer from "@/components/Footer/Footer";
+
 import { ReactLenis, useLenis } from "lenis/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -316,6 +318,8 @@ const ProductDetail = () => {
             ))}
           </div>
         </div>
+
+        <Footer />
       </div>
     </ReactLenis>
   );

@@ -7,6 +7,8 @@ import gsap from "gsap";
 import SplitType from "split-type";
 import { ReactLenis } from "lenis/react";
 
+import Footer from "@/components/Footer/Footer";
+
 const InfoPage = () => {
   const containerRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -186,6 +188,10 @@ const InfoPage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="footer-wrapper">
+        <Footer />
       </div>
     </ReactLenis>
   );

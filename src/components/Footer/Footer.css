@@ -1,0 +1,27 @@
+.footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.footer-col:nth-child(1) {
+  flex: 2;
+}
+
+.footer-col:nth-child(2) {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .clock {
+    display: none;
+  }
+
+  .footer-col:nth-child(2) {
+    flex-direction: column;
+  }
+}

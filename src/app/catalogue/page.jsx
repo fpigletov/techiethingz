@@ -5,6 +5,8 @@ import products from "@/products";
 import { generateSlug } from "@/utils";
 import Link from "next/link";
 
+import Footer from "@/components/Footer/Footer";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
@@ -138,6 +140,7 @@ const Page = () => {
           ))}
         </div>
         <div className="scroll-padding-bottom"></div>
+        <Footer />
       </div>
     </ReactLenis>
   );
