@@ -5,6 +5,7 @@ export default function Home() {
     <>
       <div className="debug-nav">
         <Link href="/catalogue">Catalogue</Link>
+        <Link href="/info">Info</Link>
       </div>
     </>
   );
