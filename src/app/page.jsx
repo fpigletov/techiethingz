@@ -1,5 +1,6 @@
+import "./index.css";
 import Link from "next/link";
 
 export default function Home() {
-  return <></>;
+  return <div className="home-page"></div>;
 }

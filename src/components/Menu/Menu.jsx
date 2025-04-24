@@ -3,6 +3,7 @@ import "./Menu.css";
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import { useTransitionRouter } from "next-view-transitions";
 
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
@@ -10,6 +11,7 @@ import { useGSAP } from "@gsap/react";
 
 const Menu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const router = useTransitionRouter();
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -49,6 +51,56 @@ const Menu = () => {
     },
     { scope: menuRef }
   );
+
+  function slideInOut() {
+    document.documentElement.animate(
+      [
+        {
+          opacity: 1,
+          transform: "translateY(0)",
+        },
+        {
+          opacity: 0.2,
+          transform: "translateY(-35%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
+      }
+    );
+
+    document.documentElement.animate(
+      [
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+        },
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }
+
+  const navigateTo = (path) => {
+    if (isAnimating) return;
+
+    closeMenu();
+
+    setTimeout(() => {
+      router.push(path, {
+        onTransitionReady: slideInOut,
+      });
+    }, 750);
+  };
 
   const openMenu = () => {
     if (isAnimating) return;
@@ -205,9 +257,18 @@ const Menu = () => {
       <div className="nav" ref={navRef}>
         <div className="nav-logo">
           <div className="revealer">
-            <Link href="/" ref={navLogoRef}>
+            <a
+              href="/"
+              ref={navLogoRef}
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/", {
+                  onTransitionReady: slideInOut,
+                });
+              }}
+            >
               Format Archive
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -232,9 +293,16 @@ const Menu = () => {
         <div className="menu-overlay-nav">
           <div className="menu-overlay-nav-logo">
             <div className="revealer">
-              <Link href="/" ref={overlayLogoRef}>
+              <a
+                href="/"
+                ref={overlayLogoRef}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("/");
+                }}
+              >
                 Format Archive
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -247,23 +315,63 @@ const Menu = () => {
 
         <div className="menu-overlay-items" ref={menuItemsRef}>
           <div className="revealer">
-            <Link href="/">Index</Link>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo("/");
+              }}
+            >
+              Index
+            </a>
           </div>
 
           <div className="revealer">
-            <Link href="/catalogue">Catalogue</Link>
+            <a
+              href="/catalogue"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo("/catalogue");
+              }}
+            >
+              Catalogue
+            </a>
           </div>
 
           <div className="revealer">
-            <Link href="/info">Info</Link>
+            <a
+              href="/info"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo("/info");
+              }}
+            >
+              Info
+            </a>
           </div>
 
           <div className="revealer">
-            <Link href="/archive">Archive</Link>
+            <a
+              href="/archive"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo("/archive");
+              }}
+            >
+              Archive
+            </a>
           </div>
 
           <div className="revealer">
-            <Link href="/editorial">Editorial</Link>
+            <a
+              href="/editorial"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo("/editorial");
+              }}
+            >
+              Editorial
+            </a>
           </div>
         </div>
 
@@ -277,13 +385,13 @@ const Menu = () => {
           <div className="menu-footer-col">
             <div className="socials">
               <div className="revealer">
-                <Link href="https://www.youtube.com/@codegrid">Meta</Link>
+                <a href="https://www.youtube.com/@codegrid">Meta</a>
               </div>
               <div className="revealer">
-                <Link href="https://www.youtube.com/@codegrid">Instagram</Link>
+                <a href="https://www.youtube.com/@codegrid">Instagram</a>
               </div>
               <div className="revealer">
-                <Link href="https://www.youtube.com/@codegrid">X</Link>
+                <a href="https://www.youtube.com/@codegrid">X</a>
               </div>
             </div>
           </div>

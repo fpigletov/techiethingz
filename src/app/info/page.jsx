@@ -23,7 +23,7 @@ const InfoPage = () => {
     const tl = gsap.timeline({
       defaults: {
         ease: "power3.out",
-        delay: 0.5,
+        delay: 0.85,
       },
     });
 
@@ -71,7 +71,7 @@ const InfoPage = () => {
           duration: 0.75,
           stagger: 0.05,
         },
-        "-=2"
+        "-=2.5"
       );
     }
   }, [containerRef, descriptionRef]);
@@ -188,10 +188,6 @@ const InfoPage = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="footer-wrapper">
-        <Footer />
       </div>
     </ReactLenis>
   );

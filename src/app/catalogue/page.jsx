@@ -73,7 +73,7 @@ const Page = () => {
           duration: 1,
           ease: "power3.out",
           stagger: 0.1,
-          delay: 0.5,
+          delay: 0.85,
         }
       );
     },

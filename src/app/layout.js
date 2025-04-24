@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ViewTransitions } from "next-view-transitions";
 
 import Menu from "@/components/Menu/Menu";
 
@@ -9,11 +10,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <Menu />
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body>
+          <Menu />
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  background-color: #fff;
 }
 
 .footer-col:nth-child(1) {
