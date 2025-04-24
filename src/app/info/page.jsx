@@ -14,7 +14,7 @@ const InfoPage = () => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set(".revealer p", {
+    gsap.set(".info-wrapper .revealer p", {
       y: "100%",
     });
 
