@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -13,7 +14,7 @@ body {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "PP Neue Montreal", sans-serif;
 }
 
 html.lenis {
@@ -49,12 +50,13 @@ p {
   display: block;
   text-decoration: none;
   text-transform: uppercase;
-  font-family: "Inter", sans-serif;
+  font-family: "PP Neue Montreal", sans-serif;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.008rem;
   line-height: 1;
   will-change: transform;
+  -webkit-font-smoothing: antialiased;
 }
 
 .revealer {
