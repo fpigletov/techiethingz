@@ -108,7 +108,7 @@ const ProductDetail = () => {
     const tl = gsap.timeline({
       defaults: {
         ease: "power3.out",
-        delay: 0.5,
+        delay: 1,
       },
     });
 
@@ -123,7 +123,7 @@ const ProductDetail = () => {
         y: "0%",
         duration: 0.75,
       },
-      "-=1.125"
+      "-=1.6"
     );
 
     if (descriptionRef.current) {
@@ -149,7 +149,7 @@ const ProductDetail = () => {
           duration: 0.75,
           stagger: 0.1,
         },
-        "-=1.25"
+        "-=1.5"
       );
     }
 
@@ -166,7 +166,7 @@ const ProductDetail = () => {
         ease: "power3.out",
         stagger: 0.1,
       },
-      "-=1.75"
+      "-=2"
     );
   }, [product, containerRef]);
 
