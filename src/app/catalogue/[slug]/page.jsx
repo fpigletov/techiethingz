@@ -3,9 +3,9 @@
 import "./product-detail.css";
 import products from "@/products";
 import { findProductBySlug, generateSlug } from "@/utils";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import { useTransitionRouter } from "next-view-transitions";
 
 import Footer from "@/components/Footer/Footer";
 
@@ -18,11 +18,65 @@ const ProductDetail = () => {
   const { slug } = useParams();
   const product = findProductBySlug(products, slug);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const router = useTransitionRouter();
 
   const containerRef = useRef(null);
   const descriptionRef = useRef(null);
 
   const lenis = useLenis(({ scroll }) => {});
+
+  function slideInOut() {
+    document.documentElement.animate(
+      [
+        {
+          opacity: 1,
+          transform: "translateY(0)",
+        },
+        {
+          opacity: 0.2,
+          transform: "translateY(-35%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
+      }
+    );
+
+    document.documentElement.animate(
+      [
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+        },
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }
+
+  const navigateTo = (path) => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+
+    router.push(path, {
+      onTransitionReady: slideInOut,
+    });
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1500);
+  };
 
   useEffect(() => {
     if (product) {
@@ -174,7 +228,9 @@ const ProductDetail = () => {
     return (
       <div className="product-not-found">
         <h1>Product not found</h1>
-        <Link href="/catalogue">Back to Catalogue</Link>
+        <div className="back-link" onClick={() => navigateTo("/catalogue")}>
+          Back to Catalogue
+        </div>
       </div>
     );
   }
@@ -292,10 +348,12 @@ const ProductDetail = () => {
 
           <div className="more-products-list">
             {relatedProducts.map((relatedProduct) => (
-              <Link
-                href={`/catalogue/${generateSlug(relatedProduct.name)}`}
+              <div
                 key={relatedProduct.id}
                 className="related-product-link"
+                onClick={() =>
+                  navigateTo(`/catalogue/${generateSlug(relatedProduct.name)}`)
+                }
               >
                 <div className="related-product-card">
                   <div className="related-product-image">
@@ -314,7 +372,7 @@ const ProductDetail = () => {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
