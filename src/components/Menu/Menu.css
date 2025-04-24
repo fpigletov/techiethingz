@@ -43,7 +43,9 @@
 .nav-menu-toggle-open p,
 .nav-cart-btn p,
 .menu-overlay-nav-logo a,
-.menu-overlay-nav-toggle-close p {
+.menu-overlay-nav-toggle-close p,
+.menu-footer a,
+.menu-footer p {
   transform: translateY(0%);
 }
 
@@ -76,4 +78,40 @@
 .menu-overlay-nav-logo .revealer,
 .menu-overlay-nav-toggle-close .revealer {
   cursor: pointer;
+}
+
+.menu-overlay a,
+.menu-overlay p {
+  color: #fff;
+}
+
+.menu-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+}
+
+.menu-footer-col:nth-child(1) {
+  flex: 2;
+}
+
+.menu-footer-col:nth-child(2) {
+  flex: 1;
+}
+
+.socials {
+  display: flex;
+  gap: 1em;
+}
+
+.menu-overlay-items {
+  padding: 50vh 1em 1em 1em;
+}
+
+.menu-overlay-items a {
+  font-size: 3rem;
 }

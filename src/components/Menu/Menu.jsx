@@ -1,7 +1,7 @@
 "use client";
 import "./Menu.css";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 
 import gsap from "gsap";
@@ -9,6 +9,8 @@ import CustomEase from "gsap/CustomEase";
 import { useGSAP } from "@gsap/react";
 
 const Menu = () => {
+  const [isAnimating, setIsAnimating] = useState(false);
+
   const menuRef = useRef(null);
   const navRef = useRef(null);
   const menuOverlayRef = useRef(null);
@@ -19,6 +21,9 @@ const Menu = () => {
 
   const overlayLogoRef = useRef(null);
   const closeBtnRef = useRef(null);
+
+  const menuItemsRef = useRef(null);
+  const menuFooterColsRef = useRef(null);
 
   gsap.registerPlugin(CustomEase);
   CustomEase.create("hop", ".15, 1, .25, 1");
@@ -33,12 +38,25 @@ const Menu = () => {
       gsap.set([overlayLogoRef.current, closeBtnRef.current], {
         y: "100%",
       });
+
+      gsap.set(".menu-overlay-items .revealer a", {
+        y: "100%",
+      });
+
+      gsap.set(".menu-footer .revealer p, .menu-footer .revealer a", {
+        y: "100%",
+      });
     },
     { scope: menuRef }
   );
 
   const openMenu = () => {
-    const tl = gsap.timeline();
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false),
+    });
 
     tl.to([navLogoRef.current, menuBtnRef.current, cartBtnRef.current], {
       y: "-100%",
@@ -64,23 +82,50 @@ const Menu = () => {
           menuOverlayRef.current.style.pointerEvents = "all";
         },
       },
-      "-=0.5"
+      "-=0.55"
     );
 
     tl.to(
       [overlayLogoRef.current, closeBtnRef.current],
       {
         y: "0%",
-        duration: 0.5,
+        duration: 1,
         stagger: 0.1,
         ease: "power3.out",
       },
-      "-=0.35"
+      "-=0.5"
+    );
+
+    tl.to(
+      ".menu-overlay-items .revealer a",
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.075,
+        ease: "power3.out",
+      },
+      "<"
+    );
+
+    tl.to(
+      ".menu-footer .revealer p, .menu-footer .revealer a",
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+      },
+      "<"
     );
   };
 
   const closeMenu = () => {
-    const tl = gsap.timeline();
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false),
+    });
 
     tl.to([overlayLogoRef.current, closeBtnRef.current], {
       y: "-100%",
@@ -88,6 +133,28 @@ const Menu = () => {
       stagger: 0.1,
       ease: "power3.out",
     });
+
+    tl.to(
+      ".menu-overlay-items .revealer a",
+      {
+        y: "-100%",
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power3.in",
+      },
+      "<"
+    );
+
+    tl.to(
+      ".menu-footer .revealer p, .menu-footer .revealer a",
+      {
+        y: "-100%",
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power3.in",
+      },
+      "<"
+    );
 
     tl.to(
       menuOverlayRef.current,
@@ -105,9 +172,17 @@ const Menu = () => {
           gsap.set([overlayLogoRef.current, closeBtnRef.current], {
             y: "100%",
           });
+
+          gsap.set(".menu-overlay-items .revealer a", {
+            y: "100%",
+          });
+
+          gsap.set(".menu-footer .revealer p, .menu-footer .revealer a", {
+            y: "100%",
+          });
         },
       },
-      "-=0.5"
+      "+=0.25"
     );
 
     tl.to(
@@ -166,6 +241,50 @@ const Menu = () => {
           <div className="menu-overlay-nav-toggle-close">
             <div className="revealer" onClick={closeMenu}>
               <p ref={closeBtnRef}>Close</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="menu-overlay-items" ref={menuItemsRef}>
+          <div className="revealer">
+            <Link href="/">Index</Link>
+          </div>
+
+          <div className="revealer">
+            <Link href="/catalogue">Catalogue</Link>
+          </div>
+
+          <div className="revealer">
+            <Link href="/info">Info</Link>
+          </div>
+
+          <div className="revealer">
+            <Link href="/archive">Archive</Link>
+          </div>
+
+          <div className="revealer">
+            <Link href="/editorial">Editorial</Link>
+          </div>
+        </div>
+
+        <div className="menu-footer" ref={menuFooterColsRef}>
+          <div className="menu-footer-col">
+            <div className="revealer">
+              <p>&copy;2025 All rights reserved</p>
+            </div>
+          </div>
+
+          <div className="menu-footer-col">
+            <div className="socials">
+              <div className="revealer">
+                <Link href="https://www.youtube.com/@codegrid">Meta</Link>
+              </div>
+              <div className="revealer">
+                <Link href="https://www.youtube.com/@codegrid">Instagram</Link>
+              </div>
+              <div className="revealer">
+                <Link href="https://www.youtube.com/@codegrid">X</Link>
+              </div>
             </div>
           </div>
         </div>
