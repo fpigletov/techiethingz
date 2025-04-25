@@ -1,12 +1,19 @@
-.info-wrapper {
+.info-page {
   position: relative;
   width: 100vw;
   height: 100%;
   min-height: 100svh;
-  padding: 25vh 1em 1em 1em;
+  background-color: #fff;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-wrapper {
   display: flex;
   gap: 1em;
-  background-color: #fff;
+  padding-top: 25vh;
 }
 
 .info-col:nth-child(1) {
@@ -18,7 +25,7 @@
 }
 
 .info-col:nth-child(2) .info-item {
-  margin-bottom: 8em;
+  margin-bottom: 5em;
 }
 
 .info-title {

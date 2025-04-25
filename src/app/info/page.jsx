@@ -188,6 +188,7 @@ const InfoPage = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </ReactLenis>
   );

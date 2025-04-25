@@ -1,18 +1,17 @@
 "use client";
-
 import "./product-detail.css";
+import { useEffect, useState, useRef } from "react";
+
 import products from "@/products";
 import { findProductBySlug, generateSlug } from "@/utils";
 import { useParams } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
-import { useTransitionRouter } from "next-view-transitions";
-
 import Footer from "@/components/Footer/Footer";
 
-import { ReactLenis, useLenis } from "lenis/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
+import { ReactLenis, useLenis } from "lenis/react";
+import { useTransitionRouter } from "next-view-transitions";
 
 const ProductDetail = () => {
   const { slug } = useParams();
