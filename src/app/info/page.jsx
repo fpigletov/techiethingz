@@ -101,7 +101,7 @@ const InfoPage = () => {
             <div className="info-item">
               <div className="info-title">
                 <div className="revealer">
-                  <p>About</p>
+                  <p>Info</p>
                 </div>
               </div>
 

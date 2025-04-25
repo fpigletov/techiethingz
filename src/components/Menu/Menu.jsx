@@ -113,10 +113,22 @@ const Menu = () => {
     );
   }
 
+  const getExactPath = () => {
+    if (typeof window !== "undefined") {
+      return window.location.pathname;
+    }
+    return currentPath;
+  };
+
+  const isExactPath = (path) => {
+    const exactCurrentPath = getExactPath();
+    return exactCurrentPath === path;
+  };
+
   const navigateTo = (path) => {
     if (isAnimating) return;
 
-    if (path === currentPath) {
+    if (isExactPath(path)) {
       closeMenu();
       return;
     }
@@ -128,24 +140,6 @@ const Menu = () => {
         onTransitionReady: slideInOut,
       });
     }, 750);
-  };
-
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-
-    if (currentPath === "/") {
-      return;
-    }
-
-    try {
-      router.push("/", {
-        onTransitionReady: slideInOut,
-      });
-    } catch (error) {
-      console.error("Navigation error:", error);
-
-      window.location.href = "/";
-    }
   };
 
   const openMenu = () => {
@@ -309,16 +303,11 @@ const Menu = () => {
               onClick={(e) => {
                 e.preventDefault();
 
-                if (window.location.pathname === "/") return;
+                if (isExactPath("/")) return;
 
-                try {
-                  router.push("/", {
-                    onTransitionReady: slideInOut,
-                  });
-                } catch (err) {
-                  console.error("Router error:", err);
-                  window.location.href = "/";
-                }
+                router.push("/", {
+                  onTransitionReady: slideInOut,
+                });
               }}
             >
               Format Archive
@@ -352,16 +341,7 @@ const Menu = () => {
                 ref={overlayLogoRef}
                 onClick={(e) => {
                   e.preventDefault();
-
-                  closeMenu();
-
-                  if (window.location.pathname === "/") return;
-
-                  setTimeout(() => {
-                    router.push("/", {
-                      onTransitionReady: slideInOut,
-                    });
-                  }, 750);
+                  navigateTo("/");
                 }}
               >
                 Format Archive

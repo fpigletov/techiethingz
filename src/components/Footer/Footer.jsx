@@ -2,6 +2,7 @@
 
 import "./Footer.css";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Footer = () => {
   const [torontoTime, setTorontoTime] = useState("");
@@ -38,7 +39,10 @@ const Footer = () => {
         </div>
 
         <div className="footer-author">
-          <p>Made by Codegrid</p>
+          <p>
+            Made by{" "}
+            <Link href="https://www.youtube.com/@codegrid">Codegrid</Link>
+          </p>
         </div>
       </div>
     </div>
