@@ -31,12 +31,13 @@ const Footer = () => {
     <div className="footer">
       <div className="footer-col">
         <p>&copy;2025 All right reserved</p>
-        <div className="clock">
-          <p>Toronto, ON {torontoTime}</p>
-        </div>
       </div>
       <div className="footer-col">
-        <div className="author">
+        <div className="footer-clock">
+          <p>Toronto, ON {torontoTime}</p>
+        </div>
+
+        <div className="footer-author">
           <p>Made by Codegrid</p>
         </div>
       </div>

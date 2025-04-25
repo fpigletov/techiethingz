@@ -9,22 +9,22 @@
 
 .footer-col:nth-child(1) {
   flex: 2;
-  display: flex;
-  gap: 2em;
 }
 
 .footer-col:nth-child(2) {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 @media (max-width: 900px) {
-  .clock {
+  .footer-clock {
     display: none;
   }
 
-  .footer-col:nth-child(2) {
-    flex-direction: column;
+  .footer-author {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
   }
 }

@@ -105,3 +105,10 @@
 .menu-overlay-items a {
   font-size: 3rem;
 }
+
+@media (max-width: 900px) {
+  .nav-cart-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
