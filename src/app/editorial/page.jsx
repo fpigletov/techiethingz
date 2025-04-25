@@ -169,7 +169,7 @@ const Page = () => {
                     >
                       <div className="article-image">
                         <img
-                          src={`/product_images/${article.bannerImg}`}
+                          src={`/article_images/${article.bannerImg}`}
                           alt={article.title}
                           className="article-img"
                         />

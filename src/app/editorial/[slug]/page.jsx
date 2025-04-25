@@ -175,7 +175,7 @@ const ArticleDetail = () => {
           <div className="article-detail-col">
             <div className="article-banner-img">
               <img
-                src={`/product_images/${article.bannerImg}`}
+                src={`/article_images/${article.bannerImg}`}
                 alt={article.title}
               />
             </div>
