@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { useTransitionRouter } from "next-view-transitions";
 import { useState, useRef, useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
-import { ReactLenis, useLenis } from "lenis/react";
+import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
@@ -152,107 +152,88 @@ const ArticleDetail = () => {
   }
 
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
-        wheelMultiplier: 1,
-        orientation: "vertical",
-        smoothWheel: true,
-        syncTouch: true,
-      }}
-    >
-      <div className="article-detail-page" ref={containerRef}>
-        <div className="article-content">
-          <div className="article-detail-col">
-            <div className="article-banner-img">
-              <img
-                src={`/article_images/${article.bannerImg}`}
-                alt={article.title}
-              />
-            </div>
+    <div className="article-detail-page" ref={containerRef}>
+      <div className="article-content">
+        <div className="article-detail-col">
+          <div className="article-banner-img">
+            <img
+              src={`/article_images/${article.bannerImg}`}
+              alt={article.title}
+            />
+          </div>
 
-            <div className="article-copy">
-              <p
-                id="article-paragraph-0"
-                ref={(el) => (descriptionRefs.current[0] = el)}
-              >
-                {article.bodyCopy[0]}
-              </p>
-            </div>
+          <div className="article-copy">
+            <p
+              id="article-paragraph-0"
+              ref={(el) => (descriptionRefs.current[0] = el)}
+            >
+              {article.bodyCopy[0]}
+            </p>
+          </div>
 
-            <div className="article-copy">
-              <p
-                id="article-paragraph-1"
-                ref={(el) => (descriptionRefs.current[1] = el)}
-              >
-                {article.bodyCopy[1]}
-              </p>
-            </div>
+          <div className="article-copy">
+            <p
+              id="article-paragraph-1"
+              ref={(el) => (descriptionRefs.current[1] = el)}
+            >
+              {article.bodyCopy[1]}
+            </p>
+          </div>
 
-            <div className="article-copy">
-              <p
-                id="article-paragraph-2"
-                ref={(el) => (descriptionRefs.current[2] = el)}
-              >
-                {article.bodyCopy[2]}
-              </p>
+          <div className="article-copy">
+            <p
+              id="article-paragraph-2"
+              ref={(el) => (descriptionRefs.current[2] = el)}
+            >
+              {article.bodyCopy[2]}
+            </p>
+          </div>
+        </div>
+        <div className="article-detail-col article-meta">
+          <div className="article-date">
+            <div className="revealer">
+              <p>Date</p>
+            </div>
+            <div className="revealer">
+              <p>{article.date}</p>
             </div>
           </div>
-          <div className="article-detail-col article-meta">
-            <div className="article-date">
-              <div className="revealer">
-                <p>Date</p>
-              </div>
-              <div className="revealer">
-                <p>{article.date}</p>
-              </div>
+          <div className="article-title">
+            <div className="revealer">
+              <p>Article Name</p>
             </div>
-            <div className="article-title">
-              <div className="revealer">
-                <p>Article Name</p>
-              </div>
-              <div className="revealer">
-                <p>{article.title}</p>
-              </div>
+            <div className="revealer">
+              <p>{article.title}</p>
+            </div>
+          </div>
+
+          <div className="article-author">
+            <div className="revealer">
+              <p>Author</p>
             </div>
 
-            <div className="article-author">
-              <div className="revealer">
-                <p>Author</p>
-              </div>
+            <div className="revealer">
+              <p>By {article.author}</p>
+            </div>
+          </div>
 
-              <div className="revealer">
-                <p>By {article.author}</p>
-              </div>
+          <div className="article-tags">
+            <div className="revealer">
+              <p>Tags</p>
             </div>
 
-            <div className="article-tags">
-              <div className="revealer">
-                <p>Tags</p>
-              </div>
-
-              <div className="tags">
-                {article.tags.map((tag, index) => (
-                  <div className="revealer" key={index}>
-                    <p>{tag}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="tags">
+              {article.tags.map((tag, index) => (
+                <div className="revealer" key={index}>
+                  <p>{tag}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    </ReactLenis>
+      <Footer />
+    </div>
   );
 };
 

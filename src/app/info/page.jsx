@@ -5,13 +5,16 @@ import { useRef, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitType from "split-type";
-import { ReactLenis } from "lenis/react";
 
 import Footer from "@/components/Footer/Footer";
+
+import { useLenis } from "lenis/react";
 
 const InfoPage = () => {
   const containerRef = useRef(null);
   const descriptionRef = useRef(null);
+
+  const lenis = useLenis(({ scroll }) => {});
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -77,120 +80,100 @@ const InfoPage = () => {
   }, [containerRef, descriptionRef]);
 
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
-        wheelMultiplier: 1,
-        orientation: "vertical",
-        smoothWheel: true,
-        syncTouch: true,
-      }}
-    >
-      <div className="info-page" ref={containerRef}>
-        <div className="info-wrapper">
-          <div className="info-col">
-            <div className="info-item">
-              <div className="info-title">
-                <div className="revealer">
-                  <p>Info</p>
-                </div>
+    <div className="info-page" ref={containerRef}>
+      <div className="info-wrapper">
+        <div className="info-col">
+          <div className="info-item">
+            <div className="info-title">
+              <div className="revealer">
+                <p>Info</p>
               </div>
+            </div>
 
-              <div
-                className="info-copy"
-                id="info-description"
-                ref={descriptionRef}
-              >
-                <p>
-                  Format Archive is a thoughtfully curated marketplace for
-                  digital design assets, tailored for creatives who value
-                  minimalism, clarity, and intentionality. Our collection
-                  includes everything from refined mockups and sleek UI
-                  templates to motion elements, sound effects, and graphic
-                  components—each crafted to elevate the way visual stories are
-                  told. Whether you're a designer shaping a brand, a developer
-                  building an interface, or an artist exploring new mediums,
-                  Format Archive offers tools that are as functional as they are
-                  beautiful, designed to seamlessly integrate into modern
-                  workflows and creative processes.
-                </p>
+            <div
+              className="info-copy"
+              id="info-description"
+              ref={descriptionRef}
+            >
+              <p>
+                Format Archive is a thoughtfully curated marketplace for digital
+                design assets, tailored for creatives who value minimalism,
+                clarity, and intentionality. Our collection includes everything
+                from refined mockups and sleek UI templates to motion elements,
+                sound effects, and graphic components—each crafted to elevate
+                the way visual stories are told. Whether you're a designer
+                shaping a brand, a developer building an interface, or an artist
+                exploring new mediums, Format Archive offers tools that are as
+                functional as they are beautiful, designed to seamlessly
+                integrate into modern workflows and creative processes.
+              </p>
 
-                <p>
-                  We believe great design is about more than aesthetics—it's
-                  about purpose, utility, and the subtle details that create
-                  emotional resonance. That's why we partner with independent
-                  designers and studios across the globe who share our
-                  commitment to quality and simplicity. Every asset we feature
-                  is carefully selected to ensure it meets our standards for
-                  visual precision and usability. At Format Archive, we aim to
-                  be more than just a resource—we’re building a creative
-                  ecosystem where thoughtful design lives, evolves, and empowers
-                  creators to do their best work with confidence and clarity.
-                </p>
+              <p>
+                We believe great design is about more than aesthetics—it's about
+                purpose, utility, and the subtle details that create emotional
+                resonance. That's why we partner with independent designers and
+                studios across the globe who share our commitment to quality and
+                simplicity. Every asset we feature is carefully selected to
+                ensure it meets our standards for visual precision and
+                usability. At Format Archive, we aim to be more than just a
+                resource—we’re building a creative ecosystem where thoughtful
+                design lives, evolves, and empowers creators to do their best
+                work with confidence and clarity.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="info-col">
+          <div className="info-item">
+            <div className="info-title">
+              <div className="revealer">
+                <p>What You Get</p>
+              </div>
+            </div>
+
+            <div className="info-copy">
+              <div className="revealer">
+                <p>Curated digital assets</p>
+              </div>
+              <div className="revealer">
+                <p>Ready to use</p>
+              </div>
+              <div className="revealer">
+                <p>No subscriptions</p>
+              </div>
+              <div className="revealer">
+                <p>Pay once, own forever</p>
               </div>
             </div>
           </div>
-          <div className="info-col">
-            <div className="info-item">
-              <div className="info-title">
-                <div className="revealer">
-                  <p>What You Get</p>
-                </div>
-              </div>
 
-              <div className="info-copy">
-                <div className="revealer">
-                  <p>Curated digital assets</p>
-                </div>
-                <div className="revealer">
-                  <p>Ready to use</p>
-                </div>
-                <div className="revealer">
-                  <p>No subscriptions</p>
-                </div>
-                <div className="revealer">
-                  <p>Pay once, own forever</p>
-                </div>
+          <div className="info-item">
+            <div className="info-title">
+              <div className="revealer">
+                <p>Contact</p>
               </div>
             </div>
 
-            <div className="info-item">
-              <div className="info-title">
-                <div className="revealer">
-                  <p>Contact</p>
-                </div>
+            <div className="info-copy">
+              <div className="revealer">
+                <p>Creator Collaborations</p>
               </div>
-
-              <div className="info-copy">
-                <div className="revealer">
-                  <p>Creator Collaborations</p>
-                </div>
-                <div className="revealer">
-                  <p>studio@formatarchive.com</p>
-                </div>
-                <br />
-                <div className="revealer">
-                  <p>Customer Support</p>
-                </div>
-                <div className="revealer">
-                  <p>support@formatarchive.com</p>
-                </div>
+              <div className="revealer">
+                <p>studio@formatarchive.com</p>
+              </div>
+              <br />
+              <div className="revealer">
+                <p>Customer Support</p>
+              </div>
+              <div className="revealer">
+                <p>support@formatarchive.com</p>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    </ReactLenis>
+      <Footer />
+    </div>
   );
 };
 

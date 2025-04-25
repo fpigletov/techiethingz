@@ -9,7 +9,7 @@ import Footer from "@/components/Footer/Footer";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import { ReactLenis, useLenis } from "lenis/react";
+import { useLenis } from "lenis/react";
 
 const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -130,65 +130,46 @@ const Page = () => {
   const articleLayout = getArticleLayout();
 
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
-        wheelMultiplier: 1,
-        orientation: "vertical",
-        smoothWheel: true,
-        syncTouch: true,
-      }}
-    >
-      <div className="editorial-page" ref={containerRef}>
-        <div className="scroll-padding-top"></div>
-        <div className="articles">
-          {articleLayout.map((row, rowIndex) => (
-            <div className="article-row" key={`row-${rowIndex}`}>
-              {row.map((article, colIndex) => (
-                <div
-                  className={`column ${
-                    article === null ? "empty-column" : "article-column"
-                  }`}
-                  key={`col-${rowIndex}-${colIndex}`}
-                >
-                  {article && (
-                    <div
-                      className="article-card"
-                      onClick={() =>
-                        navigateTo(`/editorial/${generateSlug(article.title)}`)
-                      }
-                    >
-                      <div className="article-image">
-                        <img
-                          src={`/article_images/${article.bannerImg}`}
-                          alt={article.title}
-                          className="article-img"
-                        />
-                      </div>
-                      <div className="article-info">
-                        <p className="article-title">{article.title}</p>
-                        <p className="article-author">{article.author}</p>
-                      </div>
+    <div className="editorial-page" ref={containerRef}>
+      <div className="scroll-padding-top"></div>
+      <div className="articles">
+        {articleLayout.map((row, rowIndex) => (
+          <div className="article-row" key={`row-${rowIndex}`}>
+            {row.map((article, colIndex) => (
+              <div
+                className={`column ${
+                  article === null ? "empty-column" : "article-column"
+                }`}
+                key={`col-${rowIndex}-${colIndex}`}
+              >
+                {article && (
+                  <div
+                    className="article-card"
+                    onClick={() =>
+                      navigateTo(`/editorial/${generateSlug(article.title)}`)
+                    }
+                  >
+                    <div className="article-image">
+                      <img
+                        src={`/article_images/${article.bannerImg}`}
+                        alt={article.title}
+                        className="article-img"
+                      />
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="scroll-padding-bottom"></div>
-        <Footer />
+                    <div className="article-info">
+                      <p className="article-title">{article.title}</p>
+                      <p className="article-author">{article.author}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-    </ReactLenis>
+      <div className="scroll-padding-bottom"></div>
+      <Footer />
+    </div>
   );
 };
 

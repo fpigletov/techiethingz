@@ -7,7 +7,7 @@ import Footer from "@/components/Footer/Footer";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ReactLenis, useLenis } from "lenis/react";
+import { useLenis } from "lenis/react";
 
 const Page = () => {
   const lenis = useLenis(({ scroll }) => {});
@@ -193,24 +193,6 @@ const Page = () => {
 
   return (
     <>
-      <ReactLenis
-        root
-        options={{
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          direction: "vertical",
-          gestureDirection: "vertical",
-          smooth: true,
-          smoothTouch: false,
-          touchMultiplier: 2,
-          infinite: false,
-          lerp: 0.1,
-          wheelMultiplier: 1,
-          orientation: "vertical",
-          smoothWheel: true,
-          syncTouch: true,
-        }}
-      ></ReactLenis>
       <div className="p-25"></div>
       <div className="archive-page" ref={containerRef}>
         <div className="archive">
@@ -271,7 +253,6 @@ const Page = () => {
       <div className="footer-wrapper">
         <Footer />
       </div>
-      <ReactLenis />
     </>
   );
 };

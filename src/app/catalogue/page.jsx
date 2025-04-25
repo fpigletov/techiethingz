@@ -8,7 +8,7 @@ import Footer from "@/components/Footer/Footer";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import { ReactLenis, useLenis } from "lenis/react";
+import { useLenis } from "lenis/react";
 import { useTransitionRouter } from "next-view-transitions";
 
 const Page = () => {
@@ -133,70 +133,51 @@ const Page = () => {
   );
 
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
-        wheelMultiplier: 1,
-        orientation: "vertical",
-        smoothWheel: true,
-        syncTouch: true,
-      }}
-    >
-      <div className="catalogue-page" ref={containerRef}>
-        <div className="p-25"></div>
-        <div className="products">
-          {productLayout.map((row, rowIndex) => (
-            <div className="row" key={`row-${rowIndex}`}>
-              {row.map((column, colIndex) => (
-                <div
-                  className={`column ${
-                    column.length === 0 ? "empty-column" : ""
-                  }`}
-                  key={`col-${rowIndex}-${colIndex}`}
-                >
-                  {column.map((product) => (
-                    <div
-                      key={product.id}
-                      className="product-link"
-                      onClick={() =>
-                        navigateTo(`/catalogue/${generateSlug(product.name)}`)
-                      }
-                    >
-                      <div className="product-card">
-                        <div className="product-card-image">
-                          <img
-                            src={`/product_images/${product.previewImg}`}
-                            alt={product.name}
-                            className="product-card-img"
-                          />
-                        </div>
-                        <div className="product-info">
-                          <p className="product-card-name">{product.name}</p>
-                          <p className="product-card-price">
-                            USD {product.price}
-                          </p>
-                        </div>
+    <div className="catalogue-page" ref={containerRef}>
+      <div className="p-25"></div>
+      <div className="products">
+        {productLayout.map((row, rowIndex) => (
+          <div className="row" key={`row-${rowIndex}`}>
+            {row.map((column, colIndex) => (
+              <div
+                className={`column ${
+                  column.length === 0 ? "empty-column" : ""
+                }`}
+                key={`col-${rowIndex}-${colIndex}`}
+              >
+                {column.map((product) => (
+                  <div
+                    key={product.id}
+                    className="product-link"
+                    onClick={() =>
+                      navigateTo(`/catalogue/${generateSlug(product.name)}`)
+                    }
+                  >
+                    <div className="product-card">
+                      <div className="product-card-image">
+                        <img
+                          src={`/product_images/${product.previewImg}`}
+                          alt={product.name}
+                          className="product-card-img"
+                        />
+                      </div>
+                      <div className="product-info">
+                        <p className="product-card-name">{product.name}</p>
+                        <p className="product-card-price">
+                          USD {product.price}
+                        </p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="p-50"></div>
-        <Footer />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-    </ReactLenis>
+      <div className="p-50"></div>
+      <Footer />
+    </div>
   );
 };
 
