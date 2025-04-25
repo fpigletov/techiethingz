@@ -17,10 +17,10 @@ const Cart = () => {
   const cartItems = useCartStore((state) => state.cartItems);
   const isCartOpen = useCartStore((state) => state.isCartOpen);
   const closeCart = useCartStore((state) => state.closeCart);
+  const setIsCartOpen = useCartStore((state) => state.setIsCartOpen);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const getCartTotal = useCartStore((state) => state.getCartTotal);
 
-  // Handle clicks outside the cart to close it
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (
@@ -28,15 +28,31 @@ const Cart = () => {
         !cartRef.current.contains(e.target) &&
         isCartOpen
       ) {
-        closeCart();
+        handleClose();
       }
     };
 
+    console.log("isCartOpen :::::: " + isCartOpen);
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isCartOpen, closeCart]);
+  }, [isCartOpen]);
+
+  const handleClose = () => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsCartOpen(false);
+      },
+    });
+
+    tl.to(cartRef.current, {
+      x: "100%",
+      duration: 1,
+      ease: "hop",
+      pointerEvents: "none",
+    });
+  };
 
   useGSAP(() => {
     if (isCartOpen) {
@@ -45,13 +61,6 @@ const Cart = () => {
         duration: 1,
         ease: "hop",
         pointerEvents: "all",
-      });
-    } else {
-      gsap.to(cartRef.current, {
-        x: "100%",
-        duration: 1,
-        ease: "hop",
-        pointerEvents: "none",
       });
     }
   }, [isCartOpen]);
@@ -68,7 +77,11 @@ const Cart = () => {
             <p>Bag</p>
           </div>
 
-          <div className="revealer" id="close-cart-sidebar" onClick={closeCart}>
+          <div
+            className="revealer"
+            id="close-cart-sidebar"
+            onClick={handleClose}
+          >
             <p>Close</p>
           </div>
         </div>

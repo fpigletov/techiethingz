@@ -11,12 +11,14 @@ import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
+import useCartStore from "@/store/useCartStore";
 
 const ArticleDetail = () => {
   const { slug } = useParams();
   const article = findArticleBySlug(articles, slug);
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useTransitionRouter();
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
 
   const containerRef = useRef(null);
   const descriptionRefs = useRef([]);
@@ -66,9 +68,17 @@ const ArticleDetail = () => {
 
     setIsAnimating(true);
 
-    router.push(path, {
-      onTransitionReady: slideInOut,
-    });
+    if (isCartOpen) {
+      setTimeout(() => {
+        router.push(path, {
+          onTransitionReady: slideInOut,
+        });
+      }, 500);
+    } else {
+      router.push(path, {
+        onTransitionReady: slideInOut,
+      });
+    }
 
     setTimeout(() => {
       setIsAnimating(false);

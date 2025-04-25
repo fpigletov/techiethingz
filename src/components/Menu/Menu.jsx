@@ -10,6 +10,7 @@ import CustomEase from "gsap/CustomEase";
 import { useGSAP } from "@gsap/react";
 
 const Menu = () => {
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
   const [cartCount, setCartCount] = useState(0);
@@ -334,12 +335,19 @@ const Menu = () => {
               ref={navLogoRef}
               onClick={(e) => {
                 e.preventDefault();
-
                 if (isExactPath("/")) return;
 
-                router.push("/", {
-                  onTransitionReady: slideInOut,
-                });
+                if (isCartOpen) {
+                  setTimeout(() => {
+                    router.push("/", {
+                      onTransitionReady: slideInOut,
+                    });
+                  }, 500);
+                } else {
+                  router.push("/", {
+                    onTransitionReady: slideInOut,
+                  });
+                }
               }}
             >
               Format Archive

@@ -10,10 +10,12 @@ import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { useTransitionRouter } from "next-view-transitions";
+import useCartStore from "@/store/useCartStore";
 
 const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useTransitionRouter();
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
   const containerRef = useRef(null);
 
   const lenis = useLenis(({ scroll }) => {});
@@ -100,9 +102,17 @@ const Page = () => {
 
     setIsAnimating(true);
 
-    router.push(path, {
-      onTransitionReady: slideInOut,
-    });
+    if (isCartOpen) {
+      setTimeout(() => {
+        router.push(path, {
+          onTransitionReady: slideInOut,
+        });
+      }, 500);
+    } else {
+      router.push(path, {
+        onTransitionReady: slideInOut,
+      });
+    }
 
     setTimeout(() => {
       setIsAnimating(false);

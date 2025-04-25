@@ -5,6 +5,7 @@ import articles from "@/articles";
 import { generateSlug } from "@/utils";
 import { useTransitionRouter } from "next-view-transitions";
 import Footer from "@/components/Footer/Footer";
+import useCartStore from "@/store/useCartStore";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,6 +16,7 @@ const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useTransitionRouter();
   const containerRef = useRef(null);
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
 
   const lenis = useLenis(({ scroll }) => {});
 
@@ -61,9 +63,17 @@ const Page = () => {
 
     setIsAnimating(true);
 
-    router.push(path, {
-      onTransitionReady: slideInOut,
-    });
+    if (isCartOpen) {
+      setTimeout(() => {
+        router.push(path, {
+          onTransitionReady: slideInOut,
+        });
+      }, 500);
+    } else {
+      router.push(path, {
+        onTransitionReady: slideInOut,
+      });
+    }
 
     setTimeout(() => {
       setIsAnimating(false);

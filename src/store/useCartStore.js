@@ -7,6 +7,8 @@ const useCartStore = create(
       cartItems: [],
       isCartOpen: false,
 
+      setIsCartOpen: (value) => set({ isCartOpen: value }),
+
       addToCart: (product) => {
         const { cartItems } = get();
         const existingItem = cartItems.find((item) => item.id === product.id);
@@ -32,7 +34,9 @@ const useCartStore = create(
 
       openCart: () => set({ isCartOpen: true }),
 
-      closeCart: () => set({ isCartOpen: false }),
+      // This is now just a legacy function for compatibility
+      // The actual closing animation is handled directly in the component with GSAP
+      closeCart: () => {},
 
       toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
 

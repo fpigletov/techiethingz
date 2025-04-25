@@ -20,6 +20,7 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useTransitionRouter();
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
 
   // Cart store actions
   const addToCart = useCartStore((state) => state.addToCart);
@@ -75,9 +76,17 @@ const ProductDetail = () => {
 
     setIsAnimating(true);
 
-    router.push(path, {
-      onTransitionReady: slideInOut,
-    });
+    if (isCartOpen) {
+      setTimeout(() => {
+        router.push(path, {
+          onTransitionReady: slideInOut,
+        });
+      }, 500);
+    } else {
+      router.push(path, {
+        onTransitionReady: slideInOut,
+      });
+    }
 
     setTimeout(() => {
       setIsAnimating(false);
