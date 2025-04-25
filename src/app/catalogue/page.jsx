@@ -1,17 +1,15 @@
 "use client";
-
 import "./catalogue.css";
+
 import products from "@/products";
 import { generateSlug } from "@/utils";
-import { useTransitionRouter } from "next-view-transitions";
-
 import Footer from "@/components/Footer/Footer";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-
 import { ReactLenis, useLenis } from "lenis/react";
+import { useTransitionRouter } from "next-view-transitions";
 
 const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -154,7 +152,7 @@ const Page = () => {
       }}
     >
       <div className="catalogue-page" ref={containerRef}>
-        <div className="scroll-padding-top"></div>
+        <div className="p-25"></div>
         <div className="products">
           {productLayout.map((row, rowIndex) => (
             <div className="row" key={`row-${rowIndex}`}>
@@ -195,7 +193,7 @@ const Page = () => {
             </div>
           ))}
         </div>
-        <div className="scroll-padding-bottom"></div>
+        <div className="p-50"></div>
         <Footer />
       </div>
     </ReactLenis>
