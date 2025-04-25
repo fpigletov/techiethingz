@@ -16,6 +16,7 @@
     "next-view-transitions": "^0.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "split-type": "^0.3.4"
+    "split-type": "^0.3.4",
+    "zustand": "5.0.3"
   }
 }

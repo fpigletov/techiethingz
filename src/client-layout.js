@@ -2,12 +2,17 @@
 
 import { ReactLenis } from "lenis/react";
 import Menu from "@/components/Menu/Menu";
+import Cart from "@/components/Cart/Cart";
+import { StoreProvider } from "./components/StoreProvider/StoreProvider";
 import { useEffect, useState } from "react";
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isStoreReady, setIsStoreReady] = useState(false);
 
   useEffect(() => {
+    setIsStoreReady(true);
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 900);
     };
@@ -53,8 +58,15 @@ export default function ClientLayout({ children }) {
 
   return (
     <ReactLenis root options={scrollSettings}>
-      <Menu />
-      {children}
+      <StoreProvider>
+        {isStoreReady && (
+          <>
+            <Menu />
+            <Cart />
+          </>
+        )}
+        {children}
+      </StoreProvider>
     </ReactLenis>
   );
 }

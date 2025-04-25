@@ -6,6 +6,7 @@ import products from "@/products";
 import { findProductBySlug, generateSlug } from "@/utils";
 import { useParams } from "next/navigation";
 import Footer from "@/components/Footer/Footer";
+import useCartStore from "@/store/useCartStore";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -20,8 +21,14 @@ const ProductDetail = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useTransitionRouter();
 
+  // Cart store actions
+  const addToCart = useCartStore((state) => state.addToCart);
+  const openCart = useCartStore((state) => state.openCart);
+  const closeCart = useCartStore((state) => state.closeCart);
+
   const containerRef = useRef(null);
   const descriptionRef = useRef(null);
+  const addToCartBtnRef = useRef(null);
 
   const lenis = useLenis(({ scroll }) => {});
 
@@ -75,6 +82,30 @@ const ProductDetail = () => {
     setTimeout(() => {
       setIsAnimating(false);
     }, 1500);
+  };
+
+  // Handle adding product to cart
+  const handleAddToCart = () => {
+    if (!product || isAnimating) return;
+
+    // Add to cart
+    addToCart(product);
+
+    // Animate button
+    gsap.to(addToCartBtnRef.current, {
+      scale: 0.95,
+      duration: 0.1,
+      yoyo: true,
+      repeat: 1,
+    });
+
+    // Show cart
+    openCart();
+
+    // Auto-hide cart after 3 seconds
+    setTimeout(() => {
+      closeCart();
+    }, 3000);
   };
 
   useEffect(() => {
@@ -311,7 +342,11 @@ const ProductDetail = () => {
           </div>
           <div className="info-row" id="add-to-cart-row">
             <div className="info-item">
-              <div className="add-to-cart-btn">
+              <div
+                className="add-to-cart-btn"
+                ref={addToCartBtnRef}
+                onClick={handleAddToCart}
+              >
                 <div className="revealer">
                   <p>Add to cart</p>
                 </div>

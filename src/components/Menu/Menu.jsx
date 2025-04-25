@@ -3,6 +3,7 @@ import "./Menu.css";
 
 import { useRef, useState, useEffect } from "react";
 import { useTransitionRouter } from "next-view-transitions";
+import useCartStore from "@/store/useCartStore";
 
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
@@ -11,7 +12,11 @@ import { useGSAP } from "@gsap/react";
 const Menu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
+  const [cartCount, setCartCount] = useState(0);
   const router = useTransitionRouter();
+
+  const getCartCount = useCartStore((state) => state.getCartCount);
+  const toggleCart = useCartStore((state) => state.toggleCart);
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -26,6 +31,28 @@ const Menu = () => {
 
   const menuItemsRef = useRef(null);
   const menuFooterColsRef = useRef(null);
+
+  useEffect(() => {
+    setCartCount(getCartCount());
+
+    const handleStorageChange = () => {
+      setCartCount(getCartCount());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    const interval = setInterval(() => {
+      const currentCount = getCartCount();
+      if (currentCount !== cartCount) {
+        setCartCount(currentCount);
+      }
+    }, 1000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [getCartCount, cartCount]);
 
   gsap.registerPlugin(CustomEase);
   CustomEase.create("hop", ".15, 1, .25, 1");
@@ -292,6 +319,11 @@ const Menu = () => {
     );
   };
 
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    toggleCart();
+  };
+
   return (
     <div className="menu" ref={menuRef}>
       <div className="nav" ref={navRef}>
@@ -323,9 +355,9 @@ const Menu = () => {
           </div>
 
           <div className="nav-cart-btn">
-            <div className="revealer">
+            <div className="revealer" onClick={handleCartClick}>
               <p ref={cartBtnRef}>
-                Cart (<span id="cart-count">0</span>)
+                Cart (<span id="cart-count">{cartCount}</span>)
               </p>
             </div>
           </div>
