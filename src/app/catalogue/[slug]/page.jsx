@@ -156,7 +156,7 @@ const ProductDetail = () => {
     if (!containerRef.current || !product) return;
 
     gsap.set(".info-item .revealer p", {
-      y: "100%",
+      y: "105%",
     });
 
     const tl = gsap.timeline({
@@ -203,7 +203,7 @@ const ProductDetail = () => {
           duration: 0.75,
           stagger: 0.1,
         },
-        "-=1.5"
+        "-=1.75"
       );
     }
 
@@ -327,6 +327,15 @@ const ProductDetail = () => {
                 </p>
               </div>
               <div className="info-item"></div>
+            </div>
+            <div className="info-row" id="add-to-cart-row">
+              <div className="info-item">
+                <div className="add-to-cart-btn">
+                  <div className="revealer">
+                    <p>Add to cart</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="product-detail-col product-detail-images">
