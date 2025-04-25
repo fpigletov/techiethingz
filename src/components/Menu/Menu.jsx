@@ -1,8 +1,7 @@
 "use client";
 import "./Menu.css";
 
-import { useRef, useState } from "react";
-import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
 import { useTransitionRouter } from "next-view-transitions";
 
 import gsap from "gsap";
@@ -11,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 
 const Menu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentPath, setCurrentPath] = useState("/");
   const router = useTransitionRouter();
 
   const menuRef = useRef(null);
@@ -29,6 +29,29 @@ const Menu = () => {
 
   gsap.registerPlugin(CustomEase);
   CustomEase.create("hop", ".15, 1, .25, 1");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentPath(window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (typeof window !== "undefined") {
+        setCurrentPath(window.location.pathname);
+      }
+    };
+
+    window.addEventListener("popstate", handleRouteChange);
+
+    router.events?.on?.("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+      router.events?.off?.("routeChangeComplete", handleRouteChange);
+    };
+  }, [router]);
 
   useGSAP(
     () => {
@@ -93,6 +116,11 @@ const Menu = () => {
   const navigateTo = (path) => {
     if (isAnimating) return;
 
+    if (path === currentPath) {
+      closeMenu();
+      return;
+    }
+
     closeMenu();
 
     setTimeout(() => {
@@ -100,6 +128,24 @@ const Menu = () => {
         onTransitionReady: slideInOut,
       });
     }, 750);
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+
+    if (currentPath === "/") {
+      return;
+    }
+
+    try {
+      router.push("/", {
+        onTransitionReady: slideInOut,
+      });
+    } catch (error) {
+      console.error("Navigation error:", error);
+
+      window.location.href = "/";
+    }
   };
 
   const openMenu = () => {
@@ -262,9 +308,17 @@ const Menu = () => {
               ref={navLogoRef}
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/", {
-                  onTransitionReady: slideInOut,
-                });
+
+                if (window.location.pathname === "/") return;
+
+                try {
+                  router.push("/", {
+                    onTransitionReady: slideInOut,
+                  });
+                } catch (err) {
+                  console.error("Router error:", err);
+                  window.location.href = "/";
+                }
               }}
             >
               Format Archive
@@ -298,7 +352,16 @@ const Menu = () => {
                 ref={overlayLogoRef}
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/");
+
+                  closeMenu();
+
+                  if (window.location.pathname === "/") return;
+
+                  setTimeout(() => {
+                    router.push("/", {
+                      onTransitionReady: slideInOut,
+                    });
+                  }, 750);
                 }}
               >
                 Format Archive
@@ -385,13 +448,13 @@ const Menu = () => {
           <div className="menu-footer-col">
             <div className="socials">
               <div className="revealer">
-                <a href="https://www.youtube.com/@codegrid">Meta</a>
+                <a href="https://www.youtube.com/@codegrid">YouTube</a>
               </div>
               <div className="revealer">
-                <a href="https://www.youtube.com/@codegrid">Instagram</a>
+                <a href="https://www.instagram.com/codegridweb/">Instagram</a>
               </div>
               <div className="revealer">
-                <a href="https://www.youtube.com/@codegrid">X</a>
+                <a href="https://x.com/codegridweb">X</a>
               </div>
             </div>
           </div>

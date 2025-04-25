@@ -4,8 +4,8 @@
   left: 0;
   width: 100vw;
   height: 100svh;
-  z-index: 2;
   pointer-events: none;
+  z-index: 2;
 }
 
 .nav {
@@ -37,16 +37,6 @@
 .nav-cart-btn,
 .menu-overlay-nav-toggle-close {
   flex: 1;
-}
-
-.nav-logo a,
-.nav-menu-toggle-open p,
-.nav-cart-btn p,
-.menu-overlay-nav-logo a,
-.menu-overlay-nav-toggle-close p,
-.menu-footer a,
-.menu-footer p {
-  transform: translateY(0%);
 }
 
 .menu-overlay {
