@@ -32,6 +32,10 @@
   gap: 1em;
 }
 
+.archive-header {
+  display: none;
+}
+
 .archive-header-name,
 .archive-item-name {
   flex: 1;

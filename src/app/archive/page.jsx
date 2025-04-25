@@ -1,14 +1,13 @@
 "use client";
-
 import "./archive.css";
-import products from "@/products";
 import { useRef, useEffect, useState } from "react";
+
+import products from "@/products";
+import Footer from "@/components/Footer/Footer";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
 import { ReactLenis, useLenis } from "lenis/react";
-
-import Footer from "@/components/Footer/Footer";
 
 const Page = () => {
   const lenis = useLenis(({ scroll }) => {});
