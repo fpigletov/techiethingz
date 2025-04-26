@@ -177,7 +177,7 @@ const Page = () => {
           </div>
         ))}
       </div>
-      <div className="p-25"></div>
+      <div className="p-50"></div>
       <Footer />
     </div>
   );
