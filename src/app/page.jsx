@@ -196,7 +196,7 @@ export default function Home() {
       });
 
       tl.to(
-        ".product-preview",
+        ".product-preview-hero",
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           ease: "hop",
@@ -244,19 +244,19 @@ export default function Home() {
           <div className="hp-footer-col"></div>
           <div className="hp-footer-col">
             <div
-              className="product-preview"
+              className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/mirror-orb-mockup`)}
             >
               <img src="/product_images/product_001.jpeg" alt="" />
             </div>
             <div
-              className="product-preview"
+              className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/earbud-ad-mockup`)}
             >
               <img src="/product_images/product_002.jpeg" alt="" />
             </div>
             <div
-              className="product-preview"
+              className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/minimal-phone-mockup`)}
             >
               <img src="/product_images/product_003.jpeg" alt="" />

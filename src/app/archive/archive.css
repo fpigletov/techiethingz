@@ -32,6 +32,10 @@
   gap: 1em;
 }
 
+.archive-item {
+  user-select: none;
+}
+
 .archive-header {
   display: none;
 }
