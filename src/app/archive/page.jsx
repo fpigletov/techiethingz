@@ -5,8 +5,8 @@ import { useRef, useEffect, useState } from "react";
 import products from "@/products";
 import Footer from "@/components/Footer/Footer";
 
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 
 const Page = () => {

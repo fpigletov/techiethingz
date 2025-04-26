@@ -1,16 +1,16 @@
 "use client";
-
 import "./editorial.css";
-import articles from "@/articles";
+
 import { generateSlug } from "@/utils";
-import { useTransitionRouter } from "next-view-transitions";
-import Footer from "@/components/Footer/Footer";
 import useCartStore from "@/store/useCartStore";
+import articles from "@/articles";
+import Footer from "@/components/Footer/Footer";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import { useLenis } from "lenis/react";
+import { useTransitionRouter } from "next-view-transitions";
 
 const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -141,7 +141,7 @@ const Page = () => {
 
   return (
     <div className="editorial-page" ref={containerRef}>
-      <div className="scroll-padding-top"></div>
+      <div className="p-25"></div>
       <div className="articles">
         {articleLayout.map((row, rowIndex) => (
           <div className="article-row" key={`row-${rowIndex}`}>
@@ -177,7 +177,7 @@ const Page = () => {
           </div>
         ))}
       </div>
-      <div className="scroll-padding-bottom"></div>
+      <div className="p-25"></div>
       <Footer />
     </div>
   );

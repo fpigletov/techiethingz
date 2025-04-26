@@ -1,12 +1,12 @@
 "use client";
 import "./product-detail.css";
 import { useEffect, useState, useRef } from "react";
-
-import products from "@/products";
-import { findProductBySlug, generateSlug } from "@/utils";
 import { useParams } from "next/navigation";
-import Footer from "@/components/Footer/Footer";
+
+import { findProductBySlug, generateSlug } from "@/utils";
 import useCartStore from "@/store/useCartStore";
+import products from "@/products";
+import Footer from "@/components/Footer/Footer";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -22,7 +22,6 @@ const ProductDetail = () => {
   const router = useTransitionRouter();
   const isCartOpen = useCartStore((state) => state.isCartOpen);
 
-  // Cart store actions
   const addToCart = useCartStore((state) => state.addToCart);
   const openCart = useCartStore((state) => state.openCart);
   const closeCart = useCartStore((state) => state.closeCart);
@@ -93,14 +92,11 @@ const ProductDetail = () => {
     }, 1500);
   };
 
-  // Handle adding product to cart
   const handleAddToCart = () => {
     if (!product || isAnimating) return;
 
-    // Add to cart
     addToCart(product);
 
-    // Animate button
     gsap.to(addToCartBtnRef.current, {
       scale: 0.95,
       duration: 0.1,
@@ -108,10 +104,8 @@ const ProductDetail = () => {
       repeat: 1,
     });
 
-    // Show cart
     openCart();
 
-    // Auto-hide cart after 3 seconds
     setTimeout(() => {
       closeCart();
     }, 3000);
@@ -374,12 +368,10 @@ const ProductDetail = () => {
           ))}
         </div>
       </div>
-
       <div className="more-products">
         <div className="more-products-header">
           <p>Related Products</p>
         </div>
-
         <div className="more-products-list">
           {relatedProducts.map((relatedProduct) => (
             <div
@@ -408,7 +400,6 @@ const ProductDetail = () => {
           ))}
         </div>
       </div>
-
       <Footer />
     </div>
   );

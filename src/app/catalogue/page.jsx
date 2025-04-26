@@ -1,16 +1,16 @@
 "use client";
 import "./catalogue.css";
+import { useRef, useState } from "react";
 
-import products from "@/products";
 import { generateSlug } from "@/utils";
+import useCartStore from "@/store/useCartStore";
+import products from "@/products";
 import Footer from "@/components/Footer/Footer";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { useTransitionRouter } from "next-view-transitions";
-import useCartStore from "@/store/useCartStore";
 
 const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false);

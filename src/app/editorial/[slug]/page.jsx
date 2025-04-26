@@ -1,17 +1,18 @@
 "use client";
-
 import "./article-detail.css";
+import { useState, useRef, useEffect } from "react";
+import { useParams } from "next/navigation";
+
 import articles from "@/articles";
 import { findArticleBySlug, generateSlug } from "@/utils";
-import { useParams } from "next/navigation";
-import { useTransitionRouter } from "next-view-transitions";
-import { useState, useRef, useEffect } from "react";
+import useCartStore from "@/store/useCartStore";
 import Footer from "@/components/Footer/Footer";
-import { useLenis } from "lenis/react";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
-import useCartStore from "@/store/useCartStore";
+import { useLenis } from "lenis/react";
+import { useTransitionRouter } from "next-view-transitions";
 
 const ArticleDetail = () => {
   const { slug } = useParams();
@@ -171,7 +172,6 @@ const ArticleDetail = () => {
               alt={article.title}
             />
           </div>
-
           <div className="article-copy">
             <p
               id="article-paragraph-0"
@@ -180,7 +180,6 @@ const ArticleDetail = () => {
               {article.bodyCopy[0]}
             </p>
           </div>
-
           <div className="article-copy">
             <p
               id="article-paragraph-1"
@@ -189,7 +188,6 @@ const ArticleDetail = () => {
               {article.bodyCopy[1]}
             </p>
           </div>
-
           <div className="article-copy">
             <p
               id="article-paragraph-2"
@@ -216,22 +214,18 @@ const ArticleDetail = () => {
               <p>{article.title}</p>
             </div>
           </div>
-
           <div className="article-author">
             <div className="revealer">
               <p>Author</p>
             </div>
-
             <div className="revealer">
               <p>By {article.author}</p>
             </div>
           </div>
-
           <div className="article-tags">
             <div className="revealer">
               <p>Tags</p>
             </div>
-
             <div className="tags">
               {article.tags.map((tag, index) => (
                 <div className="revealer" key={index}>

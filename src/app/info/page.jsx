@@ -1,13 +1,12 @@
 "use client";
-
 import "./info.css";
 import { useRef, useEffect } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import SplitType from "split-type";
 
 import Footer from "@/components/Footer/Footer";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 import { useLenis } from "lenis/react";
 
 const InfoPage = () => {
@@ -89,7 +88,6 @@ const InfoPage = () => {
                 <p>Info</p>
               </div>
             </div>
-
             <div
               className="info-copy"
               id="info-description"
@@ -107,7 +105,6 @@ const InfoPage = () => {
                 functional as they are beautiful, designed to seamlessly
                 integrate into modern workflows and creative processes.
               </p>
-
               <p>
                 We believe great design is about more than aesthetics—it's about
                 purpose, utility, and the subtle details that create emotional
@@ -130,7 +127,6 @@ const InfoPage = () => {
                 <p>What You Get</p>
               </div>
             </div>
-
             <div className="info-copy">
               <div className="revealer">
                 <p>Curated digital assets</p>
@@ -146,14 +142,12 @@ const InfoPage = () => {
               </div>
             </div>
           </div>
-
           <div className="info-item">
             <div className="info-title">
               <div className="revealer">
                 <p>Contact</p>
               </div>
             </div>
-
             <div className="info-copy">
               <div className="revealer">
                 <p>Creator Collaborations</p>
