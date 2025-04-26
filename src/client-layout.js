@@ -1,10 +1,11 @@
 "use client";
+import { useEffect, useState } from "react";
 
-import { ReactLenis } from "lenis/react";
+import { StoreProvider } from "./components/StoreProvider/StoreProvider";
 import Menu from "@/components/Menu/Menu";
 import Cart from "@/components/Cart/Cart";
-import { StoreProvider } from "./components/StoreProvider/StoreProvider";
-import { useEffect, useState } from "react";
+
+import { ReactLenis } from "lenis/react";
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);

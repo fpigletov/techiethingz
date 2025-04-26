@@ -1,19 +1,20 @@
 "use client";
 import "./Cart.css";
 import { useRef, useEffect } from "react";
+
 import useCartStore from "@/store/useCartStore";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import CustomEase from "gsap/CustomEase";
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create("hop", ".15, 1, .25, 1");
 
 const Cart = () => {
   const cartRef = useRef(null);
   const overlayRef = useRef(null);
 
-  gsap.registerPlugin(CustomEase);
-  CustomEase.create("hop", ".15, 1, .25, 1");
-
-  // Get cart data from store
   const cartItems = useCartStore((state) => state.cartItems);
   const isCartOpen = useCartStore((state) => state.isCartOpen);
   const closeCart = useCartStore((state) => state.closeCart);
@@ -32,8 +33,8 @@ const Cart = () => {
       }
     };
 
-    console.log("isCartOpen :::::: " + isCartOpen);
     document.addEventListener("mousedown", handleOutsideClick);
+
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
@@ -70,13 +71,11 @@ const Cart = () => {
   return (
     <>
       <div className="cart-overlay" ref={overlayRef} />
-
       <div className="cart-sidebar" ref={cartRef}>
         <div className="cart-nav">
           <div className="revealer">
             <p>Bag</p>
           </div>
-
           <div
             className="revealer"
             id="close-cart-sidebar"
@@ -85,7 +84,6 @@ const Cart = () => {
             <p>Close</p>
           </div>
         </div>
-
         <div className="cart-items" data-lenis-prevent={true}>
           {cartItems.length === 0 ? (
             <div className="empty-cart">
@@ -100,13 +98,11 @@ const Cart = () => {
                     alt={item.name}
                   />
                 </div>
-
                 <div className="cart-item-info">
                   <div className="cart-item-info-row">
                     <div className="revealer cart-item-product-name">
                       <p>{item.name}</p>
                     </div>
-
                     <div className="revealer cart-item-product-price">
                       <p>${item.price}</p>
                     </div>
@@ -124,7 +120,6 @@ const Cart = () => {
             ))
           )}
         </div>
-
         {cartItems.length > 0 && (
           <div className="cart-summary">
             <div className="cart-summary-row">
@@ -135,7 +130,6 @@ const Cart = () => {
                 <p>At Checkout</p>
               </div>
             </div>
-
             <div className="cart-summary-row">
               <div className="revealer">
                 <p>Subtotal</p>
@@ -144,7 +138,6 @@ const Cart = () => {
                 <p>${subtotal}</p>
               </div>
             </div>
-
             <div className="cart-summary-row">
               <div className="checkout-btn">
                 <div className="revealer">

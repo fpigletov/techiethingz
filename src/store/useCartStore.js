@@ -34,8 +34,6 @@ const useCartStore = create(
 
       openCart: () => set({ isCartOpen: true }),
 
-      // This is now just a legacy function for compatibility
-      // The actual closing animation is handled directly in the component with GSAP
       closeCart: () => {},
 
       toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),

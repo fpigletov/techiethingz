@@ -1,5 +1,4 @@
 "use client";
-
 import "./Footer.css";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -37,10 +36,9 @@ const Footer = () => {
         <div className="footer-clock">
           <p>Toronto, ON {torontoTime}</p>
         </div>
-
         <div className="footer-author">
           <p>
-            Made by{" "}
+            Made by&nbsp;
             <Link href="https://www.youtube.com/@codegrid">Codegrid</Link>
           </p>
         </div>

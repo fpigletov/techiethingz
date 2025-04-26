@@ -1,13 +1,16 @@
 "use client";
 import "./Menu.css";
-
 import { useRef, useState, useEffect } from "react";
-import { useTransitionRouter } from "next-view-transitions";
+
 import useCartStore from "@/store/useCartStore";
 
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
 import { useGSAP } from "@gsap/react";
+import { useTransitionRouter } from "next-view-transitions";
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create("hop", ".15, 1, .25, 1");
 
 const Menu = () => {
   const isCartOpen = useCartStore((state) => state.isCartOpen);
@@ -54,9 +57,6 @@ const Menu = () => {
       clearInterval(interval);
     };
   }, [getCartCount, cartCount]);
-
-  gsap.registerPlugin(CustomEase);
-  CustomEase.create("hop", ".15, 1, .25, 1");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -354,14 +354,12 @@ const Menu = () => {
             </a>
           </div>
         </div>
-
         <div className="nav-items">
           <div className="nav-menu-toggle-open">
             <div className="revealer" onClick={openMenu}>
               <p ref={menuBtnRef}>Menu</p>
             </div>
           </div>
-
           <div className="nav-cart-btn">
             <div className="revealer" onClick={handleCartClick}>
               <p ref={cartBtnRef}>
@@ -371,7 +369,6 @@ const Menu = () => {
           </div>
         </div>
       </div>
-
       <div className="menu-overlay" ref={menuOverlayRef}>
         <div className="menu-overlay-nav">
           <div className="menu-overlay-nav-logo">
@@ -388,14 +385,12 @@ const Menu = () => {
               </a>
             </div>
           </div>
-
           <div className="menu-overlay-nav-toggle-close">
             <div className="revealer" onClick={closeMenu}>
               <p ref={closeBtnRef}>Close</p>
             </div>
           </div>
         </div>
-
         <div className="menu-overlay-items" ref={menuItemsRef}>
           <div className="revealer">
             <a
@@ -408,7 +403,6 @@ const Menu = () => {
               Index
             </a>
           </div>
-
           <div className="revealer">
             <a
               href="/catalogue"
@@ -420,7 +414,6 @@ const Menu = () => {
               Catalogue
             </a>
           </div>
-
           <div className="revealer">
             <a
               href="/info"
@@ -432,7 +425,6 @@ const Menu = () => {
               Info
             </a>
           </div>
-
           <div className="revealer">
             <a
               href="/archive"
@@ -444,7 +436,6 @@ const Menu = () => {
               Archive
             </a>
           </div>
-
           <div className="revealer">
             <a
               href="/editorial"
@@ -457,14 +448,12 @@ const Menu = () => {
             </a>
           </div>
         </div>
-
         <div className="menu-footer" ref={menuFooterColsRef}>
           <div className="menu-footer-col">
             <div className="revealer">
               <p>&copy;2025 All rights reserved</p>
             </div>
           </div>
-
           <div className="menu-footer-col">
             <div className="socials">
               <div className="revealer">
