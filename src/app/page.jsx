@@ -13,13 +13,21 @@ gsap.registerPlugin(CustomEase);
 CustomEase.create("hop", ".15, 1, .25, 1");
 CustomEase.create("hop2", ".9, 0, .1, 1");
 
+let isInitialLoad = true;
+
 export default function Home() {
   const router = useTransitionRouter();
   const [isAnimating, setIsAnimating] = useState(false);
   const isCartOpen = useCartStore((state) => state.isCartOpen);
   const container = useRef(null);
   const counterRef = useRef(null);
-  const textWrapperRef = useRef(null);
+  const [showPreloader, setShowPreloader] = useState(isInitialLoad);
+
+  useEffect(() => {
+    return () => {
+      isInitialLoad = false;
+    };
+  }, []);
 
   function slideInOut() {
     document.documentElement.animate(
@@ -82,13 +90,14 @@ export default function Home() {
   };
 
   const startLoader = () => {
-    const counterRef = document.querySelector(".count p") || counterRef.current;
+    const counterElement =
+      document.querySelector(".count p") || counterRef.current;
     const totalDuration = 2000;
     const totalSteps = 11;
     const timePerStep = totalDuration / totalSteps;
 
-    if (counterRef) {
-      counterRef.textContent = "0";
+    if (counterElement) {
+      counterElement.textContent = "0";
     }
 
     let currentStep = 0;
@@ -107,8 +116,8 @@ export default function Home() {
           value =
             Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
         }
-        if (counterRef) {
-          counterRef.textContent = value;
+        if (counterElement) {
+          counterElement.textContent = value;
         }
         if (currentStep < totalSteps) {
           setTimeout(updateCounter, timePerStep);
@@ -120,53 +129,59 @@ export default function Home() {
   };
 
   useEffect(() => {
-    startLoader();
+    if (showPreloader) {
+      startLoader();
 
-    gsap.set(".home-page-content", {
-      clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-    });
+      gsap.set(".home-page-content", {
+        clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      });
 
-    const tl = gsap.timeline();
+      const tl = gsap.timeline();
 
-    tl.to(".count", {
-      opacity: 0,
-      delay: 2.5,
-      duration: 0.25,
-    });
+      tl.to(".count", {
+        opacity: 0,
+        delay: 2.5,
+        duration: 0.25,
+      });
 
-    tl.to(".pre-loader", {
-      scale: 0.5,
-      ease: "hop2",
-      duration: 1,
-    });
+      tl.to(".pre-loader", {
+        scale: 0.5,
+        ease: "hop2",
+        duration: 1,
+      });
 
-    tl.to(".home-page-content", {
-      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-      duration: 1.5,
-      ease: "hop2",
-      delay: -1,
-    });
+      tl.to(".home-page-content", {
+        clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        duration: 1.5,
+        ease: "hop2",
+        delay: -1,
+      });
 
-    tl.to(".loader", {
-      height: "0",
-      ease: "hop2",
-      duration: 1,
-      delay: -1,
-    });
+      tl.to(".loader", {
+        height: "0",
+        ease: "hop2",
+        duration: 1,
+        delay: -1,
+      });
 
-    tl.to(".loader-bg", {
-      height: "0",
-      ease: "hop2",
-      duration: 1,
-      delay: -0.5,
-    });
+      tl.to(".loader-bg", {
+        height: "0",
+        ease: "hop2",
+        duration: 1,
+        delay: -0.5,
+      });
 
-    tl.to(".loader-2", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-      ease: "hop2",
-      duration: 1,
-    });
-  }, []);
+      tl.to(".loader-2", {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+        ease: "hop2",
+        duration: 1,
+      });
+    } else {
+      gsap.set(".home-page-content", {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      });
+    }
+  }, [showPreloader]);
 
   useGSAP(
     () => {
@@ -176,8 +191,8 @@ export default function Home() {
         y: "0%",
         ease: "hop",
         duration: 1.5,
-        stagger: 0.1,
-        delay: 4,
+        stagger: 0.2,
+        delay: showPreloader ? 4 : 1,
       });
 
       tl.to(
@@ -191,25 +206,29 @@ export default function Home() {
         "<"
       );
     },
-    { scope: container }
+    { scope: container, dependencies: [showPreloader] }
   );
 
   return (
     <div className="home-page" ref={container}>
-      <div className="preloader-overlay">
-        <div className="pre-loader">
-          <div className="loader"></div>
-          <div className="loader-bg"></div>
-        </div>
-        <div className="count">
-          <p ref={counterRef}>0</p>
-        </div>
-        <div className="loader-2"></div>
-      </div>
+      {showPreloader && (
+        <>
+          <div className="preloader-overlay">
+            <div className="pre-loader">
+              <div className="loader"></div>
+              <div className="loader-bg"></div>
+            </div>
+            <div className="count">
+              <p ref={counterRef}>0</p>
+            </div>
+            <div className="loader-2"></div>
+          </div>
 
-      <div className="preloader-bg-img">
-        <img src="/hero.gif" alt="" />
-      </div>
+          <div className="preloader-bg-img">
+            <img src="/hero.gif" alt="" />
+          </div>
+        </>
+      )}
 
       <div className="home-page-content">
         <div className="header">
