@@ -91,6 +91,11 @@
   padding: 1em;
 }
 
+.cart-summary-row a {
+  display: block;
+  width: 100%;
+}
+
 .checkout-btn .revealer p {
   color: #000;
 }

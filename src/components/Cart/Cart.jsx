@@ -1,6 +1,7 @@
 "use client";
 import "./Cart.css";
 import { useRef, useEffect } from "react";
+import Link from "next/link";
 
 import useCartStore from "@/store/useCartStore";
 
@@ -139,11 +140,13 @@ const Cart = () => {
               </div>
             </div>
             <div className="cart-summary-row">
-              <div className="checkout-btn">
-                <div className="revealer">
-                  <p>Checkout</p>
+              <Link href="https://stripe.com/" target="_blank">
+                <div className="checkout-btn">
+                  <div className="revealer">
+                    <p>Checkout</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         )}
