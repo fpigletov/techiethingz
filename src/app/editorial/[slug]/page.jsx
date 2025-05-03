@@ -24,7 +24,7 @@ const ArticleDetail = () => {
   const containerRef = useRef(null);
   const descriptionRefs = useRef([]);
 
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
 
   function slideInOut() {
     document.documentElement.animate(

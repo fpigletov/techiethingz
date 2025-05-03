@@ -350,7 +350,7 @@ const Menu = () => {
                 }
               }}
             >
-              Format Archive
+              Techie Thingz
             </a>
           </div>
         </div>
@@ -381,7 +381,7 @@ const Menu = () => {
                   navigateTo("/");
                 }}
               >
-                Format Archive
+                Techie Thingz
               </a>
             </div>
           </div>
