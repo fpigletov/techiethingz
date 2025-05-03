@@ -30,7 +30,7 @@ const ProductDetail = () => {
   const descriptionRef = useRef(null);
   const addToCartBtnRef = useRef(null);
 
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
 
   function slideInOut() {
     document.documentElement.animate(
