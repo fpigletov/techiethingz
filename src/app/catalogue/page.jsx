@@ -18,7 +18,7 @@ const Page = () => {
   const isCartOpen = useCartStore((state) => state.isCartOpen);
   const containerRef = useRef(null);
 
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
 
   const productDistribution = [
     [1, 0, 0, 1],
@@ -144,15 +144,17 @@ const Page = () => {
 
   return (
     <div className="catalogue-page" ref={containerRef}>
+      <div className="catalogue-bg">
+        <img src="/general/bg-1.jpg" alt="Home Background" />
+      </div>
       <div className="p-25"></div>
       <div className="products">
         {productLayout.map((row, rowIndex) => (
           <div className="row" key={`row-${rowIndex}`}>
             {row.map((column, colIndex) => (
               <div
-                className={`column ${
-                  column.length === 0 ? "empty-column" : ""
-                }`}
+                className={`column ${column.length === 0 ? "empty-column" : ""
+                  }`}
                 key={`col-${rowIndex}-${colIndex}`}
               >
                 {column.map((product) => (

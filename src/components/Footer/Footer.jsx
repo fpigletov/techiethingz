@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Footer = () => {
-  const [torontoTime, setTorontoTime] = useState("");
+  const [laTime, setLaTime] = useState("");
 
   useEffect(() => {
     const updateTime = () => {
@@ -13,12 +13,12 @@ const Footer = () => {
         minute: "numeric",
         second: "numeric",
         hour12: true,
-        timeZone: "America/Toronto",
+        timeZone: "America/Los_Angeles",
       };
 
       const formatter = new Intl.DateTimeFormat("en-US", options);
       const timeString = formatter.format(new Date());
-      setTorontoTime(timeString);
+      setLaTime(timeString);
     };
 
     updateTime();
@@ -34,12 +34,12 @@ const Footer = () => {
       </div>
       <div className="footer-col">
         <div className="footer-clock">
-          <p>Toronto, ON {torontoTime}</p>
+          <p>Los Angeles, {laTime}</p>
         </div>
         <div className="footer-author">
           <p>
-            Made by&nbsp;
-            <Link href="https://www.youtube.com/@codegrid">Codegrid</Link>
+            Made by
+            <a href="https://www.fpigletov.com/works">fpigletov</a>
           </p>
         </div>
       </div>

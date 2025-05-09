@@ -400,7 +400,7 @@ const Menu = () => {
                 navigateTo("/");
               }}
             >
-              Index
+              Home
             </a>
           </div>
           <div className="revealer">
@@ -457,13 +457,10 @@ const Menu = () => {
           <div className="menu-footer-col">
             <div className="socials">
               <div className="revealer">
-                <a href="https://www.youtube.com/@codegrid">YouTube</a>
+                <a href="tel:13232844844">+1 323-284-4844</a>
               </div>
               <div className="revealer">
-                <a href="https://www.instagram.com/codegridweb/">Instagram</a>
-              </div>
-              <div className="revealer">
-                <a href="https://x.com/codegridweb">X</a>
+                <a href="mailto:info@techiethingz.com">info@techiethingz.com</a>
               </div>
             </div>
           </div>

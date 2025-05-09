@@ -270,6 +270,9 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-page" ref={containerRef}>
+      <div className="product-detail-bg">
+        <img src="/general/bg-1.jpg" alt="Home Background" />
+      </div>
       <div className="product-detail-container">
         <div className="product-detail-col product-detail-copy">
           <div className="info-row">

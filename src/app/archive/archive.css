@@ -1,16 +1,36 @@
 .archive-page {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   display: flex;
-  padding: 1em;
-  gap: 1em;
-  background-color: #fff;
+  gap: 1em;  
+  padding: 10vh 1em;
+}
+
+.archive-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: calc(100% + 20vh);
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;  
+}
+
+.archive-bg::before {
+  position: absolute;
+  content: '';
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .footer-wrapper {
   padding: 1em;
-  background-color: #fff;
+  background-color: #FAF3E0;
 }
 
 .archive {
@@ -33,6 +53,7 @@
 }
 
 .archive-item {
+  cursor: pointer;
   user-select: none;
 }
 
@@ -65,7 +86,7 @@
 
 .product-preview {
   position: fixed;
-  bottom: 1em;
+  top: 10vh;
   right: 1em;
   width: 32.5%;
   aspect-ratio: 5/3;
@@ -77,9 +98,17 @@
     display: none;
   }
 
+  .archive-page {
+    padding: 5em 1em;
+  }
+
   .archive-header-designer,
   .archive-item-designer {
     display: none;
+  }
+
+  .archive-bg {
+    height: calc(100% + 10em);
   }
 
   .product-preview {

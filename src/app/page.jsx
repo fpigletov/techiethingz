@@ -135,6 +135,9 @@ export default function Home() {
       gsap.set(".home-page-content", {
         clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
       });
+      gsap.set(".home-bg", {
+        opacity: 0,
+      });
 
       const tl = gsap.timeline();
 
@@ -176,10 +179,25 @@ export default function Home() {
         ease: "hop2",
         duration: 1,
       });
+
+      tl.to(".home-bg", {
+        opacity: 1,
+        ease: "hop2",
+        duration: 1,
+        delay: -2.5,
+      });
     } else {
+      // tl.to(".home-bg", {
+      //   opacity: 1,
+      //   ease: "hop2",
+      //   duration: 1,
+      //   // delay: -2.5,
+      // });
+
       gsap.set(".home-page-content", {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       });
+
     }
   }, [showPreloader]);
 
@@ -225,10 +243,14 @@ export default function Home() {
           </div>
 
           <div className="preloader-bg-img">
-            <img src="/hero.gif" alt="" />
+            <img src="/hero.gif" alt="Preloader Img" />
           </div>
         </>
       )}
+
+      <div className="home-bg">
+        <img src="/general/bg.jpg" alt="Home Background" />
+      </div>
 
       <div className="home-page-content">
         <div className="header">
@@ -247,19 +269,19 @@ export default function Home() {
               className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/mirror-orb-mockup`)}
             >
-              <img src="/product_images/product_001.jpeg" alt="" />
+              <img src="/product_images/product_001.jpg" alt="Product Image" />
             </div>
             <div
               className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/earbud-ad-mockup`)}
             >
-              <img src="/product_images/product_002.jpeg" alt="" />
+              <img src="/product_images/product_002.jpg" alt="Product Image" />
             </div>
             <div
               className="product-preview-hero"
               onClick={() => navigateTo(`/catalogue/minimal-phone-mockup`)}
             >
-              <img src="/product_images/product_003.jpeg" alt="" />
+              <img src="/product_images/product_003.jpg" alt="Product Image" />
             </div>
           </div>
         </div>

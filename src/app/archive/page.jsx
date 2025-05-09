@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 
 const Page = () => {
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
   const containerRef = useRef(null);
   const previewRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -193,7 +193,9 @@ const Page = () => {
 
   return (
     <>
-      <div className="p-25"></div>
+      <div className="archive-bg">
+        <img src="/general/bg.jpg" alt="Home Background" />
+      </div>
       <div className="archive-page" ref={containerRef}>
         <div className="archive">
           <div className="archive-header">
@@ -247,12 +249,11 @@ const Page = () => {
           </div>
         </div>
         <div className="archive-empty-col"></div>
+
       </div>
-      <div className="p-25"></div>
+      <Footer />
       <div className="product-preview" ref={previewRef}></div>
-      <div className="footer-wrapper">
-        <Footer />
-      </div>
+
     </>
   );
 };

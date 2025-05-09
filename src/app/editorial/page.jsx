@@ -18,7 +18,7 @@ const Page = () => {
   const containerRef = useRef(null);
   const isCartOpen = useCartStore((state) => state.isCartOpen);
 
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
 
   function slideInOut() {
     document.documentElement.animate(
@@ -141,15 +141,17 @@ const Page = () => {
 
   return (
     <div className="editorial-page" ref={containerRef}>
+      <div className="editorial-bg">
+        <img src="/general/bg-1.jpg" alt="Home Background" />
+      </div>
       <div className="p-25"></div>
       <div className="articles">
         {articleLayout.map((row, rowIndex) => (
           <div className="article-row" key={`row-${rowIndex}`}>
             {row.map((article, colIndex) => (
               <div
-                className={`column ${
-                  article === null ? "empty-column" : "article-column"
-                }`}
+                className={`column ${article === null ? "empty-column" : "article-column"
+                  }`}
                 key={`col-${rowIndex}-${colIndex}`}
               >
                 {article && (

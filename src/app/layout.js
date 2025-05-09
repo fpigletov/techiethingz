@@ -5,8 +5,8 @@ import ClientLayout from "@/client-layout";
 import { ViewTransitions } from "next-view-transitions";
 
 export const metadata = {
-  title: "Format Archive | Codegrid MWT April 2025",
-  description: "A curated marketplace for digital design assets.",
+  title: "Techie Thingz",
+  description: "New Techs",
 };
 
 export default function RootLayout({ children }) {

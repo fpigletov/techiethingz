@@ -13,7 +13,7 @@ const InfoPage = () => {
   const containerRef = useRef(null);
   const descriptionRef = useRef(null);
 
-  const lenis = useLenis(({ scroll }) => {});
+  const lenis = useLenis(({ scroll }) => { });
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -80,6 +80,9 @@ const InfoPage = () => {
 
   return (
     <div className="info-page" ref={containerRef}>
+      <div className="info-bg">
+        <img src="/general/bg.jpg" alt="Home Background" />
+      </div>
       <div className="info-wrapper">
         <div className="info-col">
           <div className="info-item">
@@ -94,28 +97,10 @@ const InfoPage = () => {
               ref={descriptionRef}
             >
               <p>
-                Format Archive is a thoughtfully curated marketplace for digital
-                design assets, tailored for creatives who value minimalism,
-                clarity, and intentionality. Our collection includes everything
-                from refined mockups and sleek UI templates to motion elements,
-                sound effects, and graphic components—each crafted to elevate
-                the way visual stories are told. Whether you're a designer
-                shaping a brand, a developer building an interface, or an artist
-                exploring new mediums, Format Archive offers tools that are as
-                functional as they are beautiful, designed to seamlessly
-                integrate into modern workflows and creative processes.
+                Welcome to the future of tech! At our gadget shop, we’re passionate about bringing you the latest innovations in smart devices, accessories, and cutting-edge tools that make life easier, faster, and a whole lot more fun. Whether you're looking for sleek wireless earbuds, powerful portable chargers, smart home assistants, or gaming gear, we've got you covered. Every product we stock is hand-picked for quality, performance, and design. Not sure what to choose? Our tech-savvy team is always ready to help you find the perfect match for your lifestyle or workspace. We believe technology should be accessible, exciting, and a little bit magical. That's why we focus on delivering top-notch service, fair prices, and gadgets you won't find everywhere. Stop by, plug in, and power up — your next favorite device is just a click away!
               </p>
               <p>
-                We believe great design is about more than aesthetics—it's about
-                purpose, utility, and the subtle details that create emotional
-                resonance. That's why we partner with independent designers and
-                studios across the globe who share our commitment to quality and
-                simplicity. Every asset we feature is carefully selected to
-                ensure it meets our standards for visual precision and
-                usability. At Format Archive, we aim to be more than just a
-                resource—we’re building a creative ecosystem where thoughtful
-                design lives, evolves, and empowers creators to do their best
-                work with confidence and clarity.
+                Our tech gadget shop is your trusted destination for the latest and most reliable technology products. We specialize in curating a wide range of high-quality devices designed to enhance productivity, connectivity, and everyday convenience. From smartwatches and wireless chargers to ergonomic accessories and portable speakers, we offer modern solutions for tech enthusiasts and professionals alike. Every item in our inventory undergoes careful selection based on performance, durability, and user satisfaction. We also provide expert guidance to help you make informed purchasing decisions, whether you're upgrading your home office or shopping for a gift. Our commitment is rooted in quality, transparency, and customer care. With secure checkout, fast shipping, and ongoing support, we aim to build lasting relationships with our clients. Experience the confidence of shopping with a tech store that values innovation as much as reliability. Discover what’s next in technology — right here.
               </p>
             </div>
           </div>

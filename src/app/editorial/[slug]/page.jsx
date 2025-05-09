@@ -164,6 +164,9 @@ const ArticleDetail = () => {
 
   return (
     <div className="article-detail-page" ref={containerRef}>
+      <div className="article-detail-bg">
+        <img src="/general/bg-1.jpg" alt="Home Background" />
+      </div>
       <div className="article-content">
         <div className="article-detail-col">
           <div className="article-banner-img">
